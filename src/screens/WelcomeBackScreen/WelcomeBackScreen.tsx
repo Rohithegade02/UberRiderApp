@@ -40,7 +40,7 @@ const WelcomeBackScreen = ({
         buttonStyle={styles.nextButton}
         buttonTextStyle={styles.resendButtonText}
         onPress={handleNext}
-        disabled={true}
+        disabled={false}
         disabledContainerStyle={styles.disabledContainerStyle}
       />
     </View>

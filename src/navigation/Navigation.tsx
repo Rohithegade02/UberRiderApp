@@ -5,6 +5,7 @@ import { navigationRef } from './NavigationUtil';
 import { LoginScreenContainer } from '../screens/LoginScreen';
 import { STACK_ROUTES } from '../routes';
 import { WelcomeBackContainer } from '../screens/WelcomeBackScreen';
+import { HomeScreenContainer } from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name={STACK_ROUTES.WelcomeBackScreen}
           component={WelcomeBackContainer}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={STACK_ROUTES.HomeScreen}
+          component={HomeScreenContainer}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
