@@ -1,8 +1,10 @@
+// Welcome Back Screen Props
 export interface WelcomeBackScreenProps extends WelcomeBackOTPProps {
   name: string;
   handleNext: () => void;
 }
 
+// Welcome Back OTP Props
 export interface WelcomeBackOTPProps {
   number: string;
   otpValue: string;

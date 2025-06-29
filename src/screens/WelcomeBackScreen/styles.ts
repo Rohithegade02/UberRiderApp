@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors, SemiBoldFont16, SemiBoldFont22 } from '../../constants';
 
+// Welcome Back Screen Styles
 export const styles = StyleSheet.create({
   container: {
     flex: 1,

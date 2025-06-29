@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import WelcomeBackScreen from './WelcomeBackScreen';
 import { navigate } from '@navigation/NavigationUtil';
 import { STACK_ROUTES } from '../../routes';
+
 // Welcome Back Screen Container Component
 export const WelcomeBackContainer = memo(() => {
   const [otpValue, setOtpValue] = useState('123456');

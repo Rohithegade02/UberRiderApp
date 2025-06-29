@@ -6,6 +6,7 @@ import WelcomeBackOTP from './WelcomeBackOTP';
 import { CustomButton } from '../../components/CustomButton';
 import { WelcomeBackScreenText } from './constants';
 
+// Welcome Back Screen Presentational Component
 const WelcomeBackScreen = ({
   name,
   number,

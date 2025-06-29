@@ -1,3 +1,4 @@
+// Welcome Back Screen Text
 export const WelcomeBackScreenText = {
   title: 'Welcome Back',
   subtitle: 'Login to your account',
