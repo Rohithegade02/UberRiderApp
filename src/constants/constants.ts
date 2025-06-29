@@ -25,4 +25,5 @@ export enum Colors {
   textInputLabel = '#282626',
   grayBackground = '#eeeeee',
   itemSeparator = '#bcbcbc',
+  otpInputBackground = '#f3f3f3',
 }

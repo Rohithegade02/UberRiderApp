@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text } from 'react-native';
 import { LoginScreenText } from './constants';
 import { styles } from './styles';
@@ -44,22 +44,26 @@ const LoginScreen = ({
         onPress={handleContinue}
         loading={loading}
       />
+      {/* OR Separator */}
       <CustomItemSeparator
         itemSeparatorText={LoginScreenText.or}
         itemSeparatorTextStyle={styles.itemSeparatorText}
         dividerLineStyle={styles.dividerLineStyle}
       />
+      {/* Social Login Buttons */}
       <LoginSocialButton
         handleGoogleLogin={handleGoogleLogin}
         handleAppleLogin={handleAppleLogin}
         handleEmailLogin={handleEmailLogin}
         loading={loading}
       />
+      {/* OR Separator */}
       <CustomItemSeparator
         itemSeparatorText={LoginScreenText.or}
         itemSeparatorTextStyle={styles.itemSeparatorText}
         dividerLineStyle={styles.dividerLineStyle}
       />
+      {/* Find My Account Button */}
       <CustomButton
         buttonText={LoginScreenText.findMyAccount}
         buttonStyle={styles.findMyAccountButton}
@@ -76,9 +80,10 @@ const LoginScreen = ({
         iconPosition="left"
         iconColor="black"
       />
+      {/* Footer Text */}
       <Text style={styles.footerText}>{LoginScreenText.footerText}</Text>
     </View>
   );
 };
 
-export default LoginScreen;
+export default memo(LoginScreen);

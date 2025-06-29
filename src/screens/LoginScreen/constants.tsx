@@ -8,4 +8,4 @@ export const LoginScreenText = {
   findMyAccount: 'Find My Account',
   footerText:
     'By proceeding, you consent to get calls, WhatsApp or SMS/RCS messages, including by automated means, from Uber and its affiliates to the number provided',
-};
+} as const;

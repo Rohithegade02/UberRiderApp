@@ -15,10 +15,11 @@ export const CustomButton = memo(
     iconPosition,
     iconColor,
     iconContainerStyle,
+    disabledContainerStyle,
   }: CustomButtonProps) => {
     return (
       <Pressable
-        style={buttonStyle}
+        style={[buttonStyle, disabled && disabledContainerStyle]}
         onPress={onPress}
         disabled={disabled}
         role="button"

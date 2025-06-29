@@ -2,8 +2,9 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './NavigationUtil';
-import { LoginScreenContainer } from '../screens/LoginScreen/LoginScreenContainer';
+import { LoginScreenContainer } from '../screens/LoginScreen';
 import { STACK_ROUTES } from '../routes';
+import { WelcomeBackContainer } from '../screens/WelcomeBackScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name={STACK_ROUTES.LoginScreen}
           component={LoginScreenContainer}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={STACK_ROUTES.WelcomeBackScreen}
+          component={WelcomeBackContainer}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

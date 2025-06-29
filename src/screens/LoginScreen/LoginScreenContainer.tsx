@@ -1,38 +1,38 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import LoginScreen from './LoginScreen';
 import { navigate } from '../../navigation/NavigationUtil';
 import { STACK_ROUTES } from '../../routes';
 
 // Login Screen Container Component
-export const LoginScreenContainer = () => {
+export const LoginScreenContainer = memo(() => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleContinue = useCallback(() => {
     setLoading(true);
     // TODO: Add your logic here
-    navigate(STACK_ROUTES.HomeScreen);
+    navigate(STACK_ROUTES.WelcomeBackScreen);
     setLoading(false);
   }, []);
 
   const handleGoogleLogin = useCallback(() => {
     setLoading(true);
     // TODO: Add your logic here
-    navigate(STACK_ROUTES.HomeScreen);
+    navigate(STACK_ROUTES.WelcomeBackScreen);
     setLoading(false);
   }, []);
 
   const handleAppleLogin = useCallback(() => {
     setLoading(true);
     // TODO: Add your logic here
-    navigate(STACK_ROUTES.HomeScreen);
+    navigate(STACK_ROUTES.WelcomeBackScreen);
     setLoading(false);
   }, []);
 
   const handleEmailLogin = useCallback(() => {
     setLoading(true);
     // TODO: Add your logic here
-    navigate(STACK_ROUTES.HomeScreen);
+    navigate(STACK_ROUTES.WelcomeBackScreen);
     setLoading(false);
   }, []);
 
@@ -47,4 +47,4 @@ export const LoginScreenContainer = () => {
       handleEmailLogin={handleEmailLogin}
     />
   );
-};
+});

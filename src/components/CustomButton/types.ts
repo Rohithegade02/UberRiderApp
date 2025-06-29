@@ -15,4 +15,5 @@ export interface CustomButtonProps {
   iconStyle?: StyleProp<ViewStyle>;
   iconContainerStyle?: StyleProp<ViewStyle>;
   iconContainerSize?: number;
+  disabledContainerStyle?: StyleProp<ViewStyle>;
 }
