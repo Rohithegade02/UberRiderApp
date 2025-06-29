@@ -2,17 +2,18 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './NavigationUtil';
-import { LoginScreen } from '../screens/LoginScreen';
+import { LoginScreenContainer } from '../screens/LoginScreen/LoginScreenContainer';
+import { STACK_ROUTES } from '../routes';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation: React.FC = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="LoginScreen">
+      <Stack.Navigator initialRouteName={STACK_ROUTES.LoginScreen}>
         <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
+          name={STACK_ROUTES.LoginScreen}
+          component={LoginScreenContainer}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
