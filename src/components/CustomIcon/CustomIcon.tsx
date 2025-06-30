@@ -3,6 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { CustomIconProps } from './types';
 
 export const CustomIcon = ({
@@ -47,6 +48,16 @@ export const CustomIcon = ({
       )}
       {iconFamily === 'AntDesign' && (
         <AntDesign
+          name={name}
+          size={size}
+          color={color}
+          onPress={onPress}
+          disabled={disabled}
+          style={style}
+        />
+      )}
+      {iconFamily === 'FontAwesome' && (
+        <FontAwesome
           name={name}
           size={size}
           color={color}

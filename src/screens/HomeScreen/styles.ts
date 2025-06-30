@@ -1,0 +1,143 @@
+import { Dimensions, StyleSheet } from 'react-native';
+import {
+  BoldFont18,
+  Colors,
+  RegularFont12,
+  RegularFont16,
+  SemiBoldFont14,
+  SemiBoldFont16,
+} from '../../constants';
+
+const { width, height } = Dimensions.get('window');
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.lightBlack,
+  },
+  logoImage: {
+    width: width * 0.35,
+    height: height * 0.1,
+    resizeMode: 'stretch',
+  },
+  whereToContainer: {
+    backgroundColor: Colors.whereToInputBackground,
+    width: '100%',
+    height: height * 0.08,
+    borderRadius: 28,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingVertical: 12,
+    gap: 20,
+  },
+  mainContainer: {
+    paddingHorizontal: 20,
+  },
+  whereToInputText: {
+    flex: 1,
+    ...BoldFont18,
+    color: Colors.whereToInputLabel,
+    fontSize: 20,
+  },
+  line: {
+    height: '100%',
+    width: 1,
+    backgroundColor: Colors.grayBorder,
+  },
+  calendarContainer: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    backgroundColor: Colors.lightBlack,
+    flexDirection: 'row',
+    gap: 6,
+    borderRadius: 16,
+  },
+  calendarText: {
+    ...SemiBoldFont16,
+    fontSize: 14,
+    color: Colors.textgray,
+  },
+  searchHistoryContainer: {
+    marginVertical: 12,
+    backgroundColor: Colors.lightBlack,
+    width: '100%',
+    height: height * 0.1,
+    paddingHorizontal: 16,
+    borderColor: Colors.grayBorder,
+    borderWidth: 2,
+    borderRadius: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  searchHistoryText: {
+    ...RegularFont16,
+    color: Colors.searchHistoryText,
+  },
+  stateText: {
+    ...RegularFont12,
+    color: Colors.textgray,
+  },
+  iconContainer: {
+    backgroundColor: Colors.lightText,
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  leftTextStyle: {
+    ...SemiBoldFont14,
+    fontSize: 18,
+    color: Colors.otpInputBackground,
+  },
+  rightTextStyle: {
+    ...SemiBoldFont14,
+    color: Colors.otpInputBackground,
+  },
+  promoCardItemContainer: {
+    backgroundColor: Colors.grayBorder,
+    height: height * 0.12,
+    flex: 1,
+    borderRadius: 16,
+    padding: 12,
+    borderColor: Colors.grayBorder,
+    borderWidth: 2,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  suggestionsContainer: {
+    marginVertical: 12,
+    gap: 16,
+  },
+  promoImage: {
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+    alignItems: 'flex-end',
+  },
+  promoCardContainer: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  promoTitle: {
+    ...RegularFont12,
+    color: Colors.textgray,
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+  },
+  promoText: {
+    backgroundColor: Colors.greenBackground,
+    ...RegularFont12,
+    color: Colors.white,
+    position: 'absolute',
+    top: -10,
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    borderRadius: 12,
+    left: '42%',
+    opacity: 0.5,
+  },
+});

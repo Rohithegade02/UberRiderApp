@@ -11,5 +11,7 @@ export interface CustomIconProps {
     | 'Ionicons'
     | 'MaterialCommunityIcons'
     | 'MaterialIcons'
-    | 'AntDesign';
+    | 'AntDesign'
+    | 'FontAwesome'
+    | 'Lucide';
 }

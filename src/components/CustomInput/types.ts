@@ -2,7 +2,7 @@ import { StyleProp, TextStyle } from 'react-native';
 
 // Custom Input Props
 export interface CustomInputProps {
-  textInputLabel: string;
+  textInputLabel?: string;
   textInputPlaceholder?: string;
   textInputValue: string;
   textInputOnChangeText: (text: string) => void;

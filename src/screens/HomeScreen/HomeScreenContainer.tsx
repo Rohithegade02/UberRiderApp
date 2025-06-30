@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import HomeScreen from './HomeScreen';
 
 // Home Screen Container Component
 export const HomeScreenContainer = memo(() => {
-  return <HomeScreen />;
+  const [searchHistory, setSearchHistory] = useState<string>('Hubballi');
+  return <HomeScreen searchHistory={searchHistory} />;
 });
