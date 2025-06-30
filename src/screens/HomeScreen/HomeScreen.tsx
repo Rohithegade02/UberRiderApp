@@ -9,6 +9,7 @@ import { Text } from 'react-native';
 import { HomeScreenProps, SearchHistoryProps } from './types';
 import { CustomHeader } from '../../components/CustomHeader';
 import { PromoCard } from './PromoCard';
+import { HomeAds } from './HomeAds';
 
 // Home Screen Presentational Component
 const HomeScreen = ({ searchHistory }: HomeScreenProps) => {
@@ -21,6 +22,7 @@ const HomeScreen = ({ searchHistory }: HomeScreenProps) => {
         {/* Search History */}
         <SearchHistory searchHistory={searchHistory} />
         <Suggestions />
+        <HomeAds />
       </View>
     </View>
   );

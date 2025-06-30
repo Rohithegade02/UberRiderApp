@@ -5,4 +5,9 @@ export const HomeScreenText = {
   seeAll: 'See all',
   suggestions: 'Suggestions',
   promo: 'Promo',
+  homeAds: 'Enjoy 15% off on select rides',
+  homeCarAdsTitle: 'Enjoy 15% off on select rides',
+  homeAutoAdsTitle: 'Enjoy 15% off on select rides',
+  homeCarAdsButton: 'Try Now',
+  homeAutoAdsButton: 'Try Auto',
 } as const;
