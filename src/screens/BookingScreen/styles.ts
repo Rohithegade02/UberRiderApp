@@ -1,5 +1,12 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { BoldFont18, Colors, RegularFont14 } from '../../constants';
+import {
+  BoldFont16,
+  BoldFont18,
+  Colors,
+  RegularFont14,
+  RegularFont16,
+  SemiBoldFont14,
+} from '../../constants';
 
 const { width, height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
@@ -102,5 +109,46 @@ export const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+  },
+  destinationSelectionContainer: {
+    // marginTop: 12,
+    gap: 12,
+  },
+  destinationDropDown: {
+    borderRadius: 8,
+    backgroundColor: Colors.whereToInputBackground,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+  },
+  destinationDropDownTextStyle: {
+    flexDirection: 'row',
+    flex: 1,
+    ...RegularFont16,
+    color: Colors.textgray,
+  },
+  movePinButton: {
+    backgroundColor: Colors.textwhite,
+    // opacity: 0.8,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+  },
+  movePinButtonText: {
+    ...BoldFont16,
+    color: Colors.textgray,
+    alignSelf: 'center',
+  },
+  movePinText: {
+    ...SemiBoldFont14,
+    color: Colors.textgray,
+    alignSelf: 'center',
+  },
+  destinationDivider: {
+    height: 1.5,
+    backgroundColor: Colors.grayBorder,
+    width: '100%',
   },
 });

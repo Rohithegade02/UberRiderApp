@@ -15,9 +15,7 @@ export const CustomDropDown = ({
   return (
     <TouchableOpacity onPress={onPress} style={styles}>
       {leftIcon && leftIcon}
-      <View>
-        <Text style={textStyle}>{title}</Text>
-      </View>
+      <Text style={textStyle}>{title}</Text>
       {rightIcon ? (
         rightIcon
       ) : (

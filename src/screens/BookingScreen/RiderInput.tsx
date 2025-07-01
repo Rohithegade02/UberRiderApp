@@ -1,18 +1,15 @@
-import { View, FlatList, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import React, { memo } from 'react';
 import { CustomInput } from '../../components/CustomInput';
 import { styles } from './styles';
-import { BookingScreenProps } from './types';
+import { BookingScreenProps, SearchedResultProps } from './types';
 import { Colors } from '../../constants';
 import { CustomIcon } from '../../components/CustomIcon';
+import { FlashList } from '@shopify/flash-list';
 
 const RiderInput = ({
   currentLocation,
-  // destinationLocation,
   setCurrentLocation,
-  // setDestinationLocation,
-  // googleApiKey,
-  // New props for custom autocomplete
   destinationInput,
   handleDestinationInputChange,
   predictions,
@@ -58,16 +55,14 @@ const RiderInput = ({
         />
       </View>
       {predictions.length > 0 && (
-        <FlatList
+        <FlashList
           data={predictions}
           keyExtractor={item => item.place_id}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.predictionRow}
-              onPress={() => handlePredictionPress(item)}
-            >
-              <Text style={styles.predictionText}>{item.description}</Text>
-            </TouchableOpacity>
+            <SearchedResult
+              item={item}
+              handlePredictionPress={handlePredictionPress}
+            />
           )}
           style={styles.predictionsContainer}
         />
@@ -76,4 +71,17 @@ const RiderInput = ({
   );
 };
 
-export default RiderInput;
+const SearchedResult = memo(
+  ({ item, handlePredictionPress }: SearchedResultProps) => {
+    return (
+      <TouchableOpacity
+        style={styles.predictionRow}
+        onPress={() => handlePredictionPress(item)}
+      >
+        <Text style={styles.predictionText}>{item.description}</Text>
+      </TouchableOpacity>
+    );
+  },
+);
+
+export default memo(RiderInput);

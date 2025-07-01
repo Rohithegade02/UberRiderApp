@@ -15,7 +15,6 @@ export const BookingScreen = ({
   handleBackPress,
   currentLocationCords,
   destinationLocationCords,
-  googleApiKey,
   destinationInput,
   handleDestinationInputChange,
   predictions,
@@ -25,6 +24,7 @@ export const BookingScreen = ({
   console.log(currentLocationCords);
   return (
     <View style={styles.container}>
+      {/* Map View */}
       <MapView
         tintColor="black"
         mapType="mutedStandard"
@@ -33,6 +33,7 @@ export const BookingScreen = ({
         userInterfaceStyle="dark"
         style={styles.map}
       >
+        {/* Markers */}
         {currentLocationCords && <Marker coordinate={currentLocationCords} />}
         {destinationLocationCords && (
           <Marker
@@ -40,6 +41,7 @@ export const BookingScreen = ({
             pinColor={Colors.active}
           />
         )}
+        {/* Polylines */}
         {routeCoordinates.length > 0 ? (
           <Polyline
             coordinates={routeCoordinates}
@@ -58,13 +60,13 @@ export const BookingScreen = ({
           )
         )}
       </MapView>
+      {/* Ride Bottom Sheet */}
       <RideSheet
         currentLocation={currentLocation}
         destinationLocation={destinationLocation}
         setCurrentLocation={setCurrentLocation}
         setDestinationLocation={setDestinationLocation}
         handleBackPress={handleBackPress}
-        googleApiKey={googleApiKey}
         destinationInput={destinationInput}
         handleDestinationInputChange={handleDestinationInputChange}
         predictions={predictions}

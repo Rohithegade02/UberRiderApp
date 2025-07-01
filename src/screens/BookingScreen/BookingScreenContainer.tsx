@@ -152,7 +152,6 @@ export const BookingScreenContainer = () => {
       currentLocationCords={currentLocationCords}
       destinationLocationCords={destinationLocationCords}
       handleBackPress={handleBackPress}
-      googleApiKey={GOOGLE_MAP_API_KEY}
       // Pass new state and handlers for custom autocomplete
       destinationInput={destinationInput}
       handleDestinationInputChange={handleDestinationInputChange}

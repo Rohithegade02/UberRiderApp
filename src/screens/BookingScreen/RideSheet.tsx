@@ -1,12 +1,14 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 import { View, Text } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { styles } from './styles';
 import { Colors } from '../../constants';
 import { CustomIcon } from '../../components/CustomIcon';
 import { CustomDropDown } from '../../components/CustomDropDown';
-import { BookingScreenProps } from './types';
+import { BookingScreenProps, DestionationSelectionProps } from './types';
 import RiderInput from './RiderInput';
+import { BookingScreenText } from './constants';
+import { CustomButton } from '../../components/CustomButton';
 
 const RideSheet = ({
   currentLocation,
@@ -14,7 +16,6 @@ const RideSheet = ({
   setCurrentLocation,
   setDestinationLocation,
   handleBackPress,
-  googleApiKey,
   destinationInput,
   handleDestinationInputChange,
   predictions,
@@ -36,13 +37,18 @@ const RideSheet = ({
   const getTitle = () => {
     switch (currentSnapIndex) {
       case 0: // 30% snap point
-        return 'Book a Ride ';
+        return BookingScreenText.setDestionation;
       case 1: // 100% snap point
-        return 'Plan your Ride';
+        return BookingScreenText.planYourRide;
       default:
-        return 'Plan your Ride';
+        return BookingScreenText.planYourRide;
     }
   };
+
+  const handlePinLocation = useCallback(() => {
+    // move to 2nd snap index
+    bottomSheetRef.current?.snapToIndex(2);
+  }, []);
 
   // renders
   return (
@@ -50,7 +56,7 @@ const RideSheet = ({
       ref={bottomSheetRef}
       snapPoints={['30%', '100%']}
       onChange={handleSheetChanges}
-      index={2}
+      index={1}
       enablePanDownToClose={false}
       backgroundStyle={{ backgroundColor: Colors.lightBlack }}
       handleIndicatorStyle={styles.handleIndicatorStyle}
@@ -67,69 +73,131 @@ const RideSheet = ({
           <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
           <View />
         </View>
-        {currentSnapIndex === 0 && (
+        {currentSnapIndex === 1 && (
           <View>
-            <Text>Quick booking options</Text>
-            {/* Add your 30% content here */}
+            <DestionationSelection handlePinLocation={handlePinLocation} />
           </View>
         )}
         {currentSnapIndex === 2 && (
-          <View style={styles.bottomSheet100Container}>
-            <View style={styles.dropDownMainContainer}>
-              <CustomDropDown
-                title="Pickup Now"
-                leftIcon={
-                  <CustomIcon
-                    name="timer-outline"
-                    size={24}
-                    color={Colors.textwhite}
-                    iconFamily="Ionicons"
-                  />
-                }
-                onPress={() => {}}
-                styles={styles.dropDownContainer}
-                textStyle={styles.dropDownTextStyle}
-              />
-              <CustomDropDown
-                title="For me"
-                leftIcon={
-                  <CustomIcon
-                    name="timer-outline"
-                    size={24}
-                    color={Colors.textwhite}
-                    iconFamily="Ionicons"
-                  />
-                }
-                onPress={() => {}}
-                styles={styles.dropDownContainer}
-                textStyle={styles.dropDownTextStyle}
-              />
-            </View>
-            <View style={styles.riderInputMainContainer}>
-              <RiderInput
-                currentLocation={currentLocation}
-                destinationLocation={destinationLocation}
-                setCurrentLocation={setCurrentLocation}
-                setDestinationLocation={setDestinationLocation}
-                handleBackPress={handleBackPress}
-                googleApiKey={googleApiKey}
-                destinationInput={destinationInput}
-                handleDestinationInputChange={handleDestinationInputChange}
-                predictions={predictions}
-                handlePredictionPress={handlePredictionPress}
-              />
-              <CustomIcon
-                name="add-circle"
-                size={32}
-                color={Colors.textgray}
-                iconFamily="Ionicons"
-              />
-            </View>
-          </View>
+          <RidePlan
+            currentLocation={currentLocation}
+            destinationLocation={destinationLocation}
+            setCurrentLocation={setCurrentLocation}
+            setDestinationLocation={setDestinationLocation}
+            handleBackPress={handleBackPress}
+            destinationInput={destinationInput}
+            handleDestinationInputChange={handleDestinationInputChange}
+            predictions={predictions}
+            handlePredictionPress={handlePredictionPress}
+          />
         )}
       </BottomSheetView>
     </BottomSheet>
   );
 };
 
-export default RideSheet;
+const DestionationSelection = ({
+  handlePinLocation,
+}: DestionationSelectionProps) => {
+  return (
+    <View style={styles.destinationSelectionContainer}>
+      <Text style={styles.movePinText}>{BookingScreenText.movePin}</Text>
+      <View style={styles.destinationDivider} />
+      <CustomDropDown
+        title={BookingScreenText.pinLocation}
+        leftIcon={
+          <CustomIcon
+            name="logo-ionic"
+            size={16}
+            color={Colors.textwhite}
+            iconFamily="Ionicons"
+          />
+        }
+        rightIcon={
+          <CustomIcon
+            name="search"
+            size={16}
+            color={Colors.textwhite}
+            iconFamily="Ionicons"
+          />
+        }
+        onPress={handlePinLocation}
+        styles={styles.destinationDropDown}
+        textStyle={styles.destinationDropDownTextStyle}
+      />
+
+      <CustomButton
+        buttonText={BookingScreenText.confirmDestionation}
+        buttonStyle={styles.movePinButton}
+        buttonTextStyle={styles.movePinButtonText}
+        onPress={() => {}}
+      />
+    </View>
+  );
+};
+const RidePlan = ({
+  currentLocation,
+  destinationLocation,
+  setCurrentLocation,
+  setDestinationLocation,
+  handleBackPress,
+  destinationInput,
+  handleDestinationInputChange,
+  predictions,
+  handlePredictionPress,
+}: BookingScreenProps) => {
+  return (
+    <View style={styles.bottomSheet100Container}>
+      <View style={styles.dropDownMainContainer}>
+        <CustomDropDown
+          title="Pickup Now"
+          leftIcon={
+            <CustomIcon
+              name="timer-outline"
+              size={24}
+              color={Colors.textwhite}
+              iconFamily="Ionicons"
+            />
+          }
+          onPress={() => {}}
+          styles={styles.dropDownContainer}
+          textStyle={styles.dropDownTextStyle}
+        />
+        <CustomDropDown
+          title="For me"
+          leftIcon={
+            <CustomIcon
+              name="timer-outline"
+              size={24}
+              color={Colors.textwhite}
+              iconFamily="Ionicons"
+            />
+          }
+          onPress={() => {}}
+          styles={styles.dropDownContainer}
+          textStyle={styles.dropDownTextStyle}
+        />
+      </View>
+      <View style={styles.riderInputMainContainer}>
+        <RiderInput
+          currentLocation={currentLocation}
+          destinationLocation={destinationLocation}
+          setCurrentLocation={setCurrentLocation}
+          setDestinationLocation={setDestinationLocation}
+          handleBackPress={handleBackPress}
+          destinationInput={destinationInput}
+          handleDestinationInputChange={handleDestinationInputChange}
+          predictions={predictions}
+          handlePredictionPress={handlePredictionPress}
+        />
+        <CustomIcon
+          name="add-circle"
+          size={32}
+          color={Colors.textgray}
+          iconFamily="Ionicons"
+        />
+      </View>
+    </View>
+  );
+};
+export default memo(RideSheet);

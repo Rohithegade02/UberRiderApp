@@ -28,7 +28,6 @@ export interface BookingScreenProps {
     longitude: number;
   } | null;
   handleBackPress: () => void;
-  googleApiKey: string;
 
   // New props for custom autocomplete
   destinationInput: string;
@@ -53,4 +52,12 @@ export interface RiderInputProps {
   handleDestinationInputChange: (text: string) => void;
   predictions: GooglePlaceData[];
   handlePredictionPress: (place: GooglePlaceData) => void;
+}
+
+export interface SearchedResultProps {
+  item: GooglePlaceData;
+  handlePredictionPress: (place: GooglePlaceData) => void;
+}
+export interface DestionationSelectionProps {
+  handlePinLocation: () => void;
 }
