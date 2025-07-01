@@ -5,10 +5,15 @@ import { styles } from './styles';
 import { Colors } from '../../constants';
 import { CustomIcon } from '../../components/CustomIcon';
 import { CustomDropDown } from '../../components/CustomDropDown';
-import { BookingScreenProps, DestionationSelectionProps } from './types';
+import {
+  BookingScreenProps,
+  DestionationSelectionProps,
+  VehicleSelectionSheetProps,
+} from './types';
 import RiderInput from './RiderInput';
 import { BookingScreenText } from './constants';
 import { CustomButton } from '../../components/CustomButton';
+import { VehicleSelectionSheet } from './VehicleSelectionSheet';
 
 const RideSheet = ({
   currentLocation,
@@ -20,6 +25,10 @@ const RideSheet = ({
   handleDestinationInputChange,
   predictions,
   handlePredictionPress,
+  currentLocationCords,
+  destinationLocationCords,
+  vehicleType,
+  setVehicleType,
 }: BookingScreenProps) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -56,40 +65,51 @@ const RideSheet = ({
       ref={bottomSheetRef}
       snapPoints={['30%', '100%']}
       onChange={handleSheetChanges}
-      index={1}
+      index={currentLocationCords && destinationLocationCords ? 2 : 1}
       enablePanDownToClose={false}
       backgroundStyle={{ backgroundColor: Colors.lightBlack }}
       handleIndicatorStyle={styles.handleIndicatorStyle}
     >
       <BottomSheetView style={styles.bottomSheetContentContainer}>
-        <View style={styles.bottomSheetHeaderContainer}>
-          <CustomIcon
-            name="arrow-back"
-            size={24}
-            color={Colors.textwhite}
-            iconFamily="Ionicons"
-            onPress={handleBackPress}
-          />
-          <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
-          <View />
-        </View>
-        {currentSnapIndex === 1 && (
-          <View>
-            <DestionationSelection handlePinLocation={handlePinLocation} />
-          </View>
-        )}
-        {currentSnapIndex === 2 && (
-          <RidePlan
-            currentLocation={currentLocation}
-            destinationLocation={destinationLocation}
-            setCurrentLocation={setCurrentLocation}
-            setDestinationLocation={setDestinationLocation}
+        {currentLocationCords && destinationLocationCords ? (
+          <VehicleSelectionSheet
             handleBackPress={handleBackPress}
-            destinationInput={destinationInput}
-            handleDestinationInputChange={handleDestinationInputChange}
-            predictions={predictions}
-            handlePredictionPress={handlePredictionPress}
+            vehicleType={vehicleType!}
+            setVehicleType={setVehicleType}
+            bottomSheetRef={bottomSheetRef}
           />
+        ) : (
+          <>
+            <View style={styles.bottomSheetHeaderContainer}>
+              <CustomIcon
+                name="arrow-back"
+                size={24}
+                color={Colors.textwhite}
+                iconFamily="Ionicons"
+                onPress={handleBackPress}
+              />
+              <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
+              <View />
+            </View>
+            {currentSnapIndex === 1 && (
+              <View>
+                <DestionationSelection handlePinLocation={handlePinLocation} />
+              </View>
+            )}
+            {currentSnapIndex === 2 && (
+              <RidePlan
+                currentLocation={currentLocation}
+                destinationLocation={destinationLocation}
+                setCurrentLocation={setCurrentLocation}
+                setDestinationLocation={setDestinationLocation}
+                handleBackPress={handleBackPress}
+                destinationInput={destinationInput}
+                handleDestinationInputChange={handleDestinationInputChange}
+                predictions={predictions}
+                handlePredictionPress={handlePredictionPress}
+              />
+            )}
+          </>
         )}
       </BottomSheetView>
     </BottomSheet>
@@ -200,4 +220,5 @@ const RidePlan = ({
     </View>
   );
 };
+
 export default memo(RideSheet);

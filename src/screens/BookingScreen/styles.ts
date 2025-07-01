@@ -3,6 +3,7 @@ import {
   BoldFont16,
   BoldFont18,
   Colors,
+  RegularFont12,
   RegularFont14,
   RegularFont16,
   SemiBoldFont14,
@@ -95,7 +96,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 5,
     marginTop: 5,
-    maxHeight: 200, // Limit the height of the suggestions list
+    maxHeight: 100, // Limit the height of the suggestions list
     zIndex: 1,
   },
   predictionRow: {
@@ -150,5 +151,47 @@ export const styles = StyleSheet.create({
     height: 1.5,
     backgroundColor: Colors.grayBorder,
     width: '100%',
+  },
+  vehicleImage: {
+    width: width * 0.15,
+    height: width * 0.15,
+    resizeMode: 'contain',
+  },
+  vehicleName: {
+    ...RegularFont16,
+    color: Colors.textwhite,
+    opacity: 0.8,
+  },
+  vehicleDropOffTime: {
+    ...RegularFont12,
+    color: Colors.textwhite,
+    opacity: 0.8,
+  },
+  vehiclePrice: {
+    ...BoldFont16,
+    color: Colors.textwhite,
+    opacity: 0.8,
+  },
+  vehicleSelectionCard: {
+    flexDirection: 'row',
+    padding: 12,
+    alignItems: 'center',
+    gap: 12,
+  },
+  vehicleTextContainer: {
+    flex: 1,
+  },
+  vehicleSelectionCardActive: {
+    flexDirection: 'row',
+    padding: 12,
+    alignItems: 'center',
+    gap: 12,
+    borderWidth: 2,
+    borderColor: Colors.textwhite,
+  },
+  dropDownCashTextStyle: {
+    flex: 1,
+    ...RegularFont16,
+    color: Colors.textwhite,
   },
 });

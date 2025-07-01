@@ -19,6 +19,7 @@ import {
 export const BookingScreenContainer = () => {
   const [currentLocation, setCurrentLocation] = useState('');
   const [destinationLocation, setDestinationLocation] = useState('');
+  const [vehicleType, setVehicleType] = useState('');
   const [currentLocationCords, setCurrentLocationCords] = useState<{
     latitude: number;
     longitude: number;
@@ -158,6 +159,8 @@ export const BookingScreenContainer = () => {
       predictions={predictions}
       handlePredictionPress={handlePredictionPress}
       routeCoordinates={routeCoordinates}
+      vehicleType={vehicleType}
+      setVehicleType={setVehicleType}
     />
   );
 };

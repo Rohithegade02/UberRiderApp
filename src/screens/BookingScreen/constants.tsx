@@ -4,4 +4,7 @@ export const BookingScreenText = {
   planYourRide: 'Plan your Ride',
   pinLocation: 'Pin Location',
   confirmDestionation: 'Confirm Destination',
+  vehicleSelection: 'Choose a Ride',
+  cash: 'Cash',
+  choose: 'Choose',
 };

@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { memo } from 'react';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { CustomInput } from '../../components/CustomInput';
 import { styles } from './styles';
 import { BookingScreenProps, SearchedResultProps } from './types';
 import { Colors } from '../../constants';
 import { CustomIcon } from '../../components/CustomIcon';
-import { FlashList } from '@shopify/flash-list';
 
 const RiderInput = ({
   currentLocation,
@@ -53,20 +53,20 @@ const RiderInput = ({
           placeholderTextStyle={Colors.textwhite as any}
           textInputMaxLength={100}
         />
+        {predictions.length > 0 && (
+          <BottomSheetFlatList
+            data={predictions}
+            keyExtractor={item => item.place_id}
+            renderItem={({ item }) => (
+              <SearchedResult
+                item={item}
+                handlePredictionPress={handlePredictionPress}
+              />
+            )}
+            style={styles.predictionsContainer}
+          />
+        )}
       </View>
-      {predictions.length > 0 && (
-        <FlashList
-          data={predictions}
-          keyExtractor={item => item.place_id}
-          renderItem={({ item }) => (
-            <SearchedResult
-              item={item}
-              handlePredictionPress={handlePredictionPress}
-            />
-          )}
-          style={styles.predictionsContainer}
-        />
-      )}
     </View>
   );
 };

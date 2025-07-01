@@ -1,4 +1,5 @@
-import { StyleProp, TextStyle } from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { ImageProps, StyleProp, TextStyle } from 'react-native';
 import {
   GooglePlaceData,
   GooglePlaceDetail,
@@ -35,6 +36,8 @@ export interface BookingScreenProps {
   predictions: GooglePlaceData[];
   handlePredictionPress: (place: GooglePlaceData) => void;
   routeCoordinates?: any;
+  vehicleType?: string;
+  setVehicleType: (vehicleType: string) => void;
 }
 
 //Rider Input Props
@@ -60,4 +63,18 @@ export interface SearchedResultProps {
 }
 export interface DestionationSelectionProps {
   handlePinLocation: () => void;
+}
+export interface VehicleSelectionSheetProps {
+  handleBackPress: () => void;
+  vehicleType: string;
+  setVehicleType: (vehicleType: string) => void;
+  bottomSheetRef: React.RefObject<BottomSheet>;
+}
+export interface VehicleSelectionCardProps {
+  vehicleName: string;
+  vehicleImage: ImageProps;
+  vehiclePrice: string;
+  vehicleDropOffTime: string;
+  onPress: () => void;
+  vehicleType: string;
 }
