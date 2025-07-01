@@ -1,0 +1,57 @@
+import { ROUTE_API } from '../api';
+import { GOOGLE_MAP_API_KEY } from '../constants';
+
+// Fetch autocomplete predictions
+export const fetchAutocomplete = async (input: string) => {
+  try {
+    const response = await fetch(
+      `${ROUTE_API.autocomplete}?input=${input}&key=${GOOGLE_MAP_API_KEY}`,
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Fetch place details
+export const fetchPlaceDetails = async (placeId: string) => {
+  try {
+    const response = await fetch(
+      `${ROUTE_API.details}?place_id=${placeId}&key=${GOOGLE_MAP_API_KEY}&fields=geometry`,
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Fetch geocode
+export const fetchGeocode = async (latitude: number, longitude: number) => {
+  try {
+    const response = await fetch(
+      `${ROUTE_API.geocode}?latlng=${latitude},${longitude}&key=${GOOGLE_MAP_API_KEY}`,
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Fetch directions
+export const fetchDirections = async (
+  origin: { latitude: number; longitude: number },
+  destination: { latitude: number; longitude: number },
+) => {
+  try {
+    const response = await fetch(
+      `${ROUTE_API.directions}?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=${GOOGLE_MAP_API_KEY}`,
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

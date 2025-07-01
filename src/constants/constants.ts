@@ -31,4 +31,5 @@ export enum Colors {
   searchIcon = '#c3c3c3',
   searchHistoryText = '#bebebe',
   greenBackground = '#2C5F39',
+  markerRed = '#7F0000',
 }

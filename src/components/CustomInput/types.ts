@@ -20,4 +20,5 @@ export interface CustomInputProps {
     | 'email-address'
     | 'phone-pad';
   textInputMaxLength?: number;
+  placeholderTextStyle?: StyleProp<TextStyle>;
 }

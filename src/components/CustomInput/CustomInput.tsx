@@ -18,6 +18,7 @@ export const CustomInput = ({
   textInputLabelStyle,
   textInputKeyboardType,
   textInputMaxLength,
+  placeholderTextStyle,
 }: CustomInputProps) => {
   return (
     <View style={styles.container}>
@@ -32,7 +33,9 @@ export const CustomInput = ({
         onChangeText={textInputOnChangeText}
         secureTextEntry={textInputSecureTextEntry}
         style={[styles.textInput, textInputStyle]}
-        placeholderTextColor={Colors.textInputPlaceholder}
+        placeholderTextColor={
+          placeholderTextStyle || (Colors.textInputPlaceholder as any)
+        }
         keyboardType={textInputKeyboardType}
         maxLength={textInputMaxLength}
         accessibilityLabel={textInputPlaceholder}
