@@ -7,4 +7,5 @@ export const BookingScreenText = {
   vehicleSelection: 'Choose a Ride',
   cash: 'Cash',
   choose: 'Choose',
+  confirmPickup: 'Confirm Pickup',
 };

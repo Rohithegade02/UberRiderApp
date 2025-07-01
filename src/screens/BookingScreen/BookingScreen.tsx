@@ -23,6 +23,8 @@ export const BookingScreen = ({
   routeCoordinates,
   vehicleType,
   setVehicleType,
+  rideState,
+  setRideState,
 }: BookingScreenProps) => {
   return (
     <View style={styles.container}>
@@ -101,6 +103,8 @@ export const BookingScreen = ({
         destinationLocationCords={destinationLocationCords}
         vehicleType={vehicleType}
         setVehicleType={setVehicleType}
+        rideState={rideState}
+        setRideState={setRideState}
       />
     </View>
   );

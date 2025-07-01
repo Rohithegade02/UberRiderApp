@@ -14,6 +14,7 @@ import {
   fetchGeocode,
   fetchDirections,
 } from '../../services';
+import { RideState } from './types';
 
 // Booking Screen Container Component
 export const BookingScreenContainer = () => {
@@ -29,14 +30,17 @@ export const BookingScreenContainer = () => {
     longitude: number;
   } | null>(null);
   const [routeCoordinates, setRouteCoordinates] = useState<any>([]);
+  const [rideState, setRideState] = useState<RideState>(RideState.IDLE);
 
   // New state for custom autocomplete
   const [destinationInput, setDestinationInput] = useState('');
   const [predictions, setPredictions] = useState<GooglePlaceData[]>([]);
 
   const handleBackPress = useCallback(() => {
-    goBack();
-  }, []);
+    if (rideState === RideState.SELECTING_DESTINATION) {
+      goBack();
+    }
+  }, [rideState]);
 
   const handleDestinationInputChange = async (text: string) => {
     setDestinationInput(text);
@@ -161,6 +165,8 @@ export const BookingScreenContainer = () => {
       routeCoordinates={routeCoordinates}
       vehicleType={vehicleType}
       setVehicleType={setVehicleType}
+      rideState={rideState}
+      setRideState={setRideState}
     />
   );
 };

@@ -29,6 +29,8 @@ const RideSheet = ({
   destinationLocationCords,
   vehicleType,
   setVehicleType,
+  rideState,
+  setRideState,
 }: BookingScreenProps) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -77,6 +79,8 @@ const RideSheet = ({
             vehicleType={vehicleType!}
             setVehicleType={setVehicleType}
             bottomSheetRef={bottomSheetRef}
+            rideState={rideState}
+            setRideState={setRideState}
           />
         ) : (
           <>

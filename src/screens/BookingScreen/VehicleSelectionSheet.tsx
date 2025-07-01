@@ -3,7 +3,11 @@ import { styles } from './styles';
 import { CustomIcon } from '../../components/CustomIcon';
 import { Colors, IMAGE } from '../../constants';
 import { BookingScreenText } from './constants';
-import { VehicleSelectionCardProps, VehicleSelectionSheetProps } from './types';
+import {
+  RideState,
+  VehicleSelectionCardProps,
+  VehicleSelectionSheetProps,
+} from './types';
 import { Text } from 'react-native';
 import { CustomDropDown } from '../../components/CustomDropDown';
 import { CustomButton } from '../../components/CustomButton';
@@ -13,6 +17,7 @@ export const VehicleSelectionSheet = ({
   vehicleType,
   setVehicleType,
   bottomSheetRef,
+  setRideState,
 }: VehicleSelectionSheetProps) => {
   return (
     <View>
@@ -37,6 +42,7 @@ export const VehicleSelectionSheet = ({
         vehicleDropOffTime="10:00 AM"
         onPress={() => {
           setVehicleType('Auto');
+          setRideState(RideState.CONFIRMING_PICKUP);
           bottomSheetRef.current?.close();
         }}
         vehicleType={vehicleType}
@@ -48,6 +54,7 @@ export const VehicleSelectionSheet = ({
         vehicleDropOffTime="10:00 AM"
         onPress={() => {
           setVehicleType('Car');
+          setRideState(RideState.CONFIRMING_PICKUP);
           bottomSheetRef.current?.close();
         }}
         vehicleType={vehicleType}
@@ -73,6 +80,7 @@ export const VehicleSelectionSheet = ({
         buttonStyle={styles.movePinButton}
         buttonTextStyle={styles.movePinButtonText}
         onPress={() => {
+          setRideState(RideState.CONFIRMING_PICKUP);
           bottomSheetRef.current?.close();
         }}
       />

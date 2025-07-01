@@ -11,6 +11,14 @@ export interface CustomInputProps {
   placeholderTextStyle?: StyleProp<TextStyle>;
 }
 
+// Ride State Enum
+export enum RideState {
+  IDLE,
+  SELECTING_DESTINATION,
+  SELECTING_VEHICLE,
+  CONFIRMING_PICKUP,
+}
+
 // Booking Screen Props
 export interface BookingScreenProps {
   currentLocation?: string;
@@ -38,6 +46,9 @@ export interface BookingScreenProps {
   routeCoordinates?: any;
   vehicleType?: string;
   setVehicleType: (vehicleType: string) => void;
+  bottomSheetRef?: React.RefObject<BottomSheet> | null;
+  rideState: RideState;
+  setRideState: (rideState: RideState) => void;
 }
 
 //Rider Input Props
@@ -68,7 +79,7 @@ export interface VehicleSelectionSheetProps {
   handleBackPress: () => void;
   vehicleType: string;
   setVehicleType: (vehicleType: string) => void;
-  bottomSheetRef: React.RefObject<BottomSheet>;
+  bottomSheetRef: React.RefObject<BottomSheet> | null;
 }
 export interface VehicleSelectionCardProps {
   vehicleName: string;
@@ -77,4 +88,9 @@ export interface VehicleSelectionCardProps {
   vehicleDropOffTime: string;
   onPress: () => void;
   vehicleType: string;
+}
+
+export interface ConfirmationSheetProps {
+  handleBackPress: () => void;
+  onConfirm: () => void;
 }
