@@ -12,13 +12,13 @@ import { PromoCard } from './PromoCard';
 import { HomeAds } from './HomeAds';
 
 // Home Screen Presentational Component
-const HomeScreen = ({ searchHistory }: HomeScreenProps) => {
+const HomeScreen = ({ searchHistory, handleWhereTo }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
       <Image source={IMAGE.homeScreenLogo} style={styles.logoImage} />
       <View style={styles.mainContainer}>
         {/* Where To Input */}
-        <WhereToInput />
+        <WhereToInput handleWhereTo={handleWhereTo} />
         {/* Search History */}
         <SearchHistory searchHistory={searchHistory} />
         <Suggestions />
@@ -29,9 +29,9 @@ const HomeScreen = ({ searchHistory }: HomeScreenProps) => {
 };
 
 // Where To Input
-const WhereToInput = memo(() => {
+const WhereToInput = memo(({ handleWhereTo }: HomeScreenProps) => {
   return (
-    <TouchableOpacity style={styles.whereToContainer}>
+    <TouchableOpacity style={styles.whereToContainer} onPress={handleWhereTo}>
       {/* TODO:icon not working */}
       <CustomIcon
         name="search"
