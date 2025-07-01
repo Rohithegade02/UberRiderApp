@@ -70,13 +70,7 @@ const LoginScreen = ({
         buttonTextStyle={styles.findMyAccountButtonText}
         onPress={handleContinue}
         loading={loading}
-        icon={
-          <CustomIcon
-            name="email"
-            iconFamily="MaterialCommunityIcons"
-            size={24}
-          />
-        }
+        icon={<CustomIcon name="search" iconFamily="Ionicons" size={24} />}
         iconPosition="left"
         iconColor="black"
       />

@@ -24,7 +24,7 @@ export const LoginSocialButton = memo(
         {
           text: LoginScreenText.loginWithApple,
           onPress: handleAppleLogin,
-          icon: <CustomIcon name="apple" iconFamily="AntDesign" size={24} />,
+          icon: <CustomIcon name="apple" iconFamily="FontAwesome" size={24} />,
         },
         {
           text: LoginScreenText.loginWithEmail,

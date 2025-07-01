@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderColor: Colors.grayBackground,
     marginBottom: 12,
+    alignItems: 'center',
   },
   continueButtonText: {
     ...SemiBoldFont18,
@@ -50,6 +51,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderColor: Colors.grayBackground,
     marginBottom: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 12,
   },
   socialButtonText: {
     ...BoldFont18,
@@ -64,6 +69,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderColor: Colors.grayBackground,
     marginBottom: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 12,
   },
   findMyAccountButtonText: {
     ...BoldFont18,
