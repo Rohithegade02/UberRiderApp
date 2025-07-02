@@ -21,4 +21,5 @@ export interface CustomInputProps {
     | 'phone-pad';
   textInputMaxLength?: number;
   placeholderTextStyle?: StyleProp<TextStyle>;
+  autoFocus?: boolean;
 }

@@ -14,6 +14,10 @@ const WelcomeBackScreen = ({
   setOtpValue,
   handleResendCode,
   handleNext,
+  timer,
+  canResend,
+  loading,
+  resendLoading,
 }: WelcomeBackScreenProps) => {
   return (
     <View style={styles.container}>
@@ -23,16 +27,19 @@ const WelcomeBackScreen = ({
         otpValue={otpValue}
         setOtpValue={setOtpValue}
         handleResendCode={handleResendCode}
+        timer={timer}
+        canResend={canResend}
+        loading={loading}
+        resendLoading={resendLoading}
       />
       <CustomButton
         buttonText={WelcomeBackScreenText.resendCode}
         buttonStyle={styles.resendButton}
         buttonTextStyle={styles.resendButtonText}
-        onPress={() => {}}
-        disabled={true}
+        onPress={handleResendCode}
+        disabled={!canResend}
         disabledContainerStyle={styles.disabledContainerStyle}
       />
-
       {/* Item Separator */}
       <View style={styles.itemSeparator} />
       <CustomButton
@@ -40,7 +47,7 @@ const WelcomeBackScreen = ({
         buttonStyle={styles.nextButton}
         buttonTextStyle={styles.resendButtonText}
         onPress={handleNext}
-        disabled={false}
+        disabled={otpValue.length !== 6}
         disabledContainerStyle={styles.disabledContainerStyle}
       />
     </View>

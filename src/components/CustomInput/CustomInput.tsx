@@ -19,6 +19,7 @@ export const CustomInput = ({
   textInputKeyboardType,
   textInputMaxLength,
   placeholderTextStyle,
+  autoFocus,
 }: CustomInputProps) => {
   return (
     <View style={styles.container}>
@@ -40,6 +41,7 @@ export const CustomInput = ({
         maxLength={textInputMaxLength}
         accessibilityLabel={textInputPlaceholder}
         accessibilityRole="text"
+        autoFocus={autoFocus}
       />
       {showTextInputError && (
         <Text style={styles.errorText}>{textInputError}</Text>

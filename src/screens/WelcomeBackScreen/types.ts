@@ -10,4 +10,8 @@ export interface WelcomeBackOTPProps {
   otpValue: string;
   setOtpValue: (otpValue: string) => void;
   handleResendCode: () => void;
+  timer: number;
+  canResend: boolean;
+  loading: boolean;
+  resendLoading: boolean;
 }

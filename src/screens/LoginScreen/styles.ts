@@ -85,4 +85,7 @@ export const styles = StyleSheet.create({
     color: Colors.itemSeparator,
     textAlign: 'left',
   },
+  disabledContainerStyle: {
+    opacity: 0.5,
+  },
 });

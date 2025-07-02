@@ -8,6 +8,7 @@ import { CustomButton } from '../../components/CustomButton';
 import { CustomItemSeparator } from '../../components/ItemSeparator';
 import { LoginSocialButton } from './LoginSocialButton';
 import { CustomIcon } from '../../components/CustomIcon';
+import { Colors } from '../../constants';
 
 // Login Screen Presentational Component
 const LoginScreen = ({
@@ -43,6 +44,9 @@ const LoginScreen = ({
         buttonTextStyle={styles.continueButtonText}
         onPress={handleContinue}
         loading={loading}
+        disabled={loading || phoneNumber.length !== 10}
+        disabledContainerStyle={styles.disabledContainerStyle}
+        iconColor={Colors.white}
       />
       {/* OR Separator */}
       <CustomItemSeparator
@@ -69,7 +73,7 @@ const LoginScreen = ({
         buttonStyle={styles.findMyAccountButton}
         buttonTextStyle={styles.findMyAccountButtonText}
         onPress={handleContinue}
-        loading={loading}
+        // loading={loading}
         icon={<CustomIcon name="search" iconFamily="Ionicons" size={24} />}
         iconPosition="left"
         iconColor="black"

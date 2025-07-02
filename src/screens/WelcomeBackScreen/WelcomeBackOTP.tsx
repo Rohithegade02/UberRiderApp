@@ -11,7 +11,11 @@ const WelcomeBackOTP = memo(
     otpValue,
     setOtpValue,
     handleResendCode,
-  }: WelcomeBackOTPProps) => {
+  }: // timer,
+  // canResend,
+  // loading,
+  // resendLoading,
+  WelcomeBackOTPProps) => {
     return (
       <View style={styles.containerOTP}>
         <Text>

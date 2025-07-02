@@ -10,8 +10,8 @@ export const LoginSocialButton = memo(
     handleGoogleLogin,
     handleAppleLogin,
     handleEmailLogin,
-    loading,
-  }: LoginSocialButtonProps) => {
+  }: // loading,
+  LoginSocialButtonProps) => {
     const buttons = useMemo(
       () => [
         {
@@ -50,7 +50,6 @@ export const LoginSocialButton = memo(
             buttonStyle={styles.socialButton}
             buttonTextStyle={styles.socialButtonText}
             onPress={onPress}
-            loading={loading}
             icon={icon}
             iconPosition="left"
             iconColor="black"
