@@ -6,8 +6,10 @@ import { IMAGE } from '../../constants/image';
 import { CustomButton } from '../../components/CustomButton';
 import { FlashList } from '@shopify/flash-list';
 import { HomeAdsProps } from './types';
+import { CustomLoader } from '../../components/CustomLoader';
+import { Rect } from 'react-content-loader/native';
 
-export const HomeAds = () => {
+export const HomeAds = ({ loading }: HomeAdsProps) => {
   const data = useMemo(
     () => [
       {
@@ -25,6 +27,14 @@ export const HomeAds = () => {
     ],
     [],
   );
+
+  if (loading) {
+    return (
+      <CustomLoader>
+        <Rect x="0" y="0" rx="12" ry="12" width="95%" height="120" />
+      </CustomLoader>
+    );
+  }
   return (
     <View style={styles.homeAdsContentContainer}>
       <FlashList

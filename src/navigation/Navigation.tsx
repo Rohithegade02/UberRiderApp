@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const Navigation: React.FC = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName={STACK_ROUTES.LoginScreen}>
+      <Stack.Navigator initialRouteName={STACK_ROUTES.TabNavigator}>
         <Stack.Screen
           name={STACK_ROUTES.LoginScreen}
           component={LoginScreenContainer}
