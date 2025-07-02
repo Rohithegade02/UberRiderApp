@@ -7,6 +7,7 @@ import { styles } from './styles';
 import { BookingScreenProps, RideState } from './types';
 import { Colors } from '../../constants';
 import { AnimatingPolylineComponent } from '../../utils/animatePolyline';
+import RideCompletedModal from './RideCompletedModal';
 
 // Booking  Presentation Screen Component
 export const BookingScreen = ({
@@ -158,6 +159,10 @@ export const BookingScreen = ({
           distanceInfo={distanceInfo}
         />
       )}
+      <RideCompletedModal
+        visible={rideState === RideState.RIDE_COMPLETED}
+        onDismiss={handleBackPress}
+      />
     </View>
   );
 };

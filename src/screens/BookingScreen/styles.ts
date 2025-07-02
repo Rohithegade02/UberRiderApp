@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.textwhite,
     borderWidth: 0,
     borderRadius: 24,
-    width: width * 0.7,
+    width: width * 0.65,
     height: height * 0.06,
     padding: 0,
     color: Colors.textwhite,
@@ -96,8 +96,10 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 5,
     marginTop: 5,
-    maxHeight: 100, // Limit the height of the suggestions list
+    maxHeight: 200, // Limit the height of the suggestions list
     zIndex: 1,
+    width: width * 0.8,
+    // alignSelf: 'center',
   },
   predictionRow: {
     padding: 15,
@@ -105,6 +107,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: Colors.grayBorder,
   },
   predictionText: {
+    ...RegularFont12,
     color: Colors.black,
   },
   map: {
@@ -193,5 +196,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     ...RegularFont16,
     color: Colors.textwhite,
+  },
+  confirmationSheetContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  riderInputSubMainContainer: {
+    gap: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

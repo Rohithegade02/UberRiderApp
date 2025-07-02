@@ -8,4 +8,5 @@ export const BookingScreenText = {
   cash: 'Cash',
   choose: 'Choose',
   confirmPickup: 'Confirm Pickup',
+  pickupNow: 'Pickup Now',
 };

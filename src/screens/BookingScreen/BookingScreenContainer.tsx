@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDebounce } from '../../hooks/useDebounce';
 import { BookingScreen } from './BookingScreen';
 import { goBack } from '../../navigation/NavigationUtil';
 import Geolocation from '@react-native-community/geolocation';
@@ -88,18 +89,24 @@ export const BookingScreenContainer = () => {
     }
   }, [rideState]);
 
-  const handleDestinationInputChange = async (text: string) => {
-    setDestinationInput(text);
-    if (text.length > 2) {
-      try {
-        const data = await fetchAutocomplete(text);
-        if (data && data.predictions) {
-          setPredictions(data.predictions);
-        }
-      } catch (error) {
-        console.error('Error fetching predictions:', error);
+  const debouncedFetchPredictions = useDebounce(async (query: string) => {
+    try {
+      const data = await fetchAutocomplete(query);
+      if (data?.predictions) {
+        setPredictions(data.predictions);
+      } else {
         setPredictions([]);
       }
+    } catch (err) {
+      console.error('Error fetching predictions:', err);
+      setPredictions([]);
+    }
+  }, 400);
+
+  const handleDestinationInputChange = (text: string) => {
+    setDestinationInput(text);
+    if (text.length > 2) {
+      debouncedFetchPredictions(text);
     } else {
       setPredictions([]);
     }

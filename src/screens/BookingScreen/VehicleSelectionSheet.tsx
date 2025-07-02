@@ -71,7 +71,6 @@ export const VehicleSelectionSheet = ({
         duration={formattedDuration}
         formattedTime={formattedTime}
       />
-      <View style={styles.destinationDivider} />
       <CustomDropDown
         title={BookingScreenText.cash}
         textStyle={styles.dropDownCashTextStyle}

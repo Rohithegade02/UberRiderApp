@@ -66,9 +66,9 @@ const RideSheet = ({
     <BottomSheet
       ref={bottomSheetRef}
       // Added middle snap-point so indices 0-2 are valid
-      snapPoints={['30%', '100%']}
+      snapPoints={['35%', '100%']}
       onChange={handleSheetChanges}
-      index={currentLocationCords && destinationLocationCords ? 1 : 0}
+      index={currentLocationCords && destinationLocationCords ? 1 : 2}
       enablePanDownToClose={false}
       backgroundStyle={{ backgroundColor: Colors.lightBlack }}
       handleIndicatorStyle={styles.handleIndicatorStyle}
@@ -178,7 +178,7 @@ const RidePlan = ({
     <View style={styles.bottomSheet100Container}>
       <View style={styles.dropDownMainContainer}>
         <CustomDropDown
-          title="Pickup Now"
+          title={BookingScreenText.pickupNow}
           leftIcon={
             <CustomIcon
               name="timer-outline"
@@ -217,12 +217,6 @@ const RidePlan = ({
           handleDestinationInputChange={handleDestinationInputChange}
           predictions={predictions}
           handlePredictionPress={handlePredictionPress}
-        />
-        <CustomIcon
-          name="add-circle"
-          size={32}
-          color={Colors.textgray}
-          iconFamily="Ionicons"
         />
       </View>
     </View>

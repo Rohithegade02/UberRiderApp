@@ -16,57 +16,68 @@ const RiderInput = ({
   handlePredictionPress,
 }: BookingScreenProps) => {
   return (
-    <View style={styles.riderInputContainer}>
-      <View style={styles.lineContainer}>
+    <View>
+      <View style={styles.riderInputSubMainContainer}>
+        <View style={styles.riderInputContainer}>
+          <View style={styles.lineContainer}>
+            <CustomIcon
+              name="circle-o"
+              size={24}
+              color={Colors.textwhite}
+              iconFamily="FontAwesome"
+            />
+            <View style={styles.line} />
+            <CustomIcon
+              name="circle-o"
+              size={24}
+              color={Colors.textwhite}
+              iconFamily="FontAwesome"
+            />
+          </View>
+          <View>
+            <CustomInput
+              textInputLabel="From ?"
+              textInputPlaceholder="From ?"
+              textInputValue={currentLocation!}
+              textInputOnChangeText={setCurrentLocation}
+              textInputStyle={styles.riderInput}
+              textInputKeyboardType="default"
+              placeholderTextStyle={Colors.textwhite as any}
+              textInputMaxLength={100}
+            />
+            <CustomInput
+              textInputLabel="Where to?"
+              textInputPlaceholder="Where to?"
+              textInputValue={destinationInput}
+              textInputOnChangeText={handleDestinationInputChange}
+              textInputStyle={styles.riderInput}
+              textInputKeyboardType="default"
+              placeholderTextStyle={Colors.textwhite as any}
+              textInputMaxLength={100}
+            />
+          </View>
+        </View>
         <CustomIcon
-          name="circle-o"
-          size={24}
-          color={Colors.textwhite}
-          iconFamily="FontAwesome"
-        />
-        <View style={styles.line} />
-        <CustomIcon
-          name="circle-o"
-          size={24}
-          color={Colors.textwhite}
-          iconFamily="FontAwesome"
+          name="add-circle"
+          size={32}
+          color={Colors.textgray}
+          iconFamily="Ionicons"
         />
       </View>
-      <View>
-        <CustomInput
-          textInputLabel="From ?"
-          textInputPlaceholder="From ?"
-          textInputValue={currentLocation!}
-          textInputOnChangeText={setCurrentLocation}
-          textInputStyle={styles.riderInput}
-          textInputKeyboardType="default"
-          placeholderTextStyle={Colors.textwhite as any}
-          textInputMaxLength={100}
+      {predictions.length > 0 && (
+        <BottomSheetFlatList
+          data={predictions}
+          keyExtractor={item => item.place_id}
+          renderItem={({ item }) => (
+            <SearchedResult
+              item={item}
+              handlePredictionPress={handlePredictionPress}
+            />
+          )}
+          scrollEnabled
+          style={styles.predictionsContainer}
         />
-        <CustomInput
-          textInputLabel="Where to?"
-          textInputPlaceholder="Where to?"
-          textInputValue={destinationInput}
-          textInputOnChangeText={handleDestinationInputChange}
-          textInputStyle={styles.riderInput}
-          textInputKeyboardType="default"
-          placeholderTextStyle={Colors.textwhite as any}
-          textInputMaxLength={100}
-        />
-        {predictions.length > 0 && (
-          <BottomSheetFlatList
-            data={predictions}
-            keyExtractor={item => item.place_id}
-            renderItem={({ item }) => (
-              <SearchedResult
-                item={item}
-                handlePredictionPress={handlePredictionPress}
-              />
-            )}
-            style={styles.predictionsContainer}
-          />
-        )}
-      </View>
+      )}
     </View>
   );
 };

@@ -20,20 +20,15 @@ const ConfirmationSheet = ({
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      snapPoints={['25%']}
+      snapPoints={['30%']}
       enablePanDownToClose={false}
       backgroundStyle={{ backgroundColor: Colors.lightBlack }}
       handleIndicatorStyle={styles.handleIndicatorStyle}
       index={0}
     >
-      <BottomSheetView>
+      <BottomSheetView style={styles.confirmationSheetContainer}>
         <View>
-          <View
-            style={[
-              styles.bottomSheetHeaderContainer,
-              { paddingHorizontal: 16 },
-            ]}
-          >
+          <View style={[styles.bottomSheetHeaderContainer]}>
             <CustomIcon
               name="arrow-back"
               size={24}
@@ -47,15 +42,6 @@ const ConfirmationSheet = ({
             <View />
           </View>
           <View style={styles.destinationDivider} />
-          {/* Pickup location display */}
-          <CustomInput
-            textInputPlaceholder="Pickup location"
-            textInputValue={pickupAddress}
-            textInputOnChangeText={() => {}}
-            textInputStyle={{ color: Colors.textwhite }}
-            placeholderTextStyle={{ color: Colors.textgray }}
-            editable={false}
-          />
           <CustomButton
             buttonText={BookingScreenText.confirmPickup}
             buttonStyle={styles.movePinButton}
