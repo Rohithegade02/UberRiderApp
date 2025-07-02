@@ -13,5 +13,6 @@ export interface CustomIconProps {
     | 'MaterialIcons'
     | 'AntDesign'
     | 'FontAwesome'
-    | 'Lucide';
+    | 'Lucide'
+    | 'Octicons';
 }

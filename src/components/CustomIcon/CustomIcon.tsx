@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Octicons from 'react-native-vector-icons/Octicons';
 import { CustomIconProps } from './types';
 
 export const CustomIcon = ({
@@ -58,6 +59,16 @@ export const CustomIcon = ({
       )}
       {iconFamily === 'FontAwesome' && (
         <FontAwesome
+          name={name}
+          size={size}
+          color={color}
+          onPress={onPress}
+          disabled={disabled}
+          style={style}
+        />
+      )}
+      {iconFamily === 'Octicons' && (
+        <Octicons
           name={name}
           size={size}
           color={color}

@@ -5,8 +5,8 @@ import { navigationRef } from './NavigationUtil';
 import { LoginScreenContainer } from '../screens/LoginScreen';
 import { STACK_ROUTES } from '../routes';
 import { WelcomeBackContainer } from '../screens/WelcomeBackScreen';
-import { HomeScreenContainer } from '../screens/HomeScreen';
 import { BookingScreenContainer } from '../screens/BookingScreen';
+import { TabNavigatorContainer } from './TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,13 +25,13 @@ const Navigation: React.FC = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={STACK_ROUTES.HomeScreen}
-          component={HomeScreenContainer}
+          name={STACK_ROUTES.BookingScreen}
+          component={BookingScreenContainer}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={STACK_ROUTES.BookingScreen}
-          component={BookingScreenContainer}
+          name={STACK_ROUTES.TabNavigator}
+          component={TabNavigatorContainer}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
