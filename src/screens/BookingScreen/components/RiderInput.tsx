@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { memo } from 'react';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { CustomInput } from '../../components/CustomInput';
-import { styles } from './styles';
-import { BookingScreenProps, SearchedResultProps } from './types';
-import { Colors } from '../../constants';
-import { CustomIcon } from '../../components/CustomIcon';
+import { CustomInput } from '../../../components/CustomInput';
+import { styles } from '../styles';
+import { BookingScreenProps, SearchedResultProps } from '../types';
+import { Colors } from '../../../constants';
+import { CustomIcon } from '../../../components/CustomIcon';
 
 const RiderInput = ({
   currentLocation,

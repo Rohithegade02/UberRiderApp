@@ -1,18 +1,18 @@
 import { Image, Pressable, View } from 'react-native';
-import { styles } from './styles';
-import { CustomIcon } from '../../components/CustomIcon';
-import { Colors, IMAGE } from '../../constants';
-import { BookingScreenText } from './constants';
+import { styles } from '../styles';
+import { CustomIcon } from '../../../components/CustomIcon';
+import { Colors, IMAGE } from '../../../constants';
+import { BookingScreenText } from '../constants';
 import {
   RideState,
   VehicleSelectionCardProps,
   VehicleSelectionSheetProps,
-} from './types';
+} from '../types';
 import { Text } from 'react-native';
-import { CustomDropDown } from '../../components/CustomDropDown';
-import { CustomButton } from '../../components/CustomButton';
+import { CustomDropDown } from '../../../components/CustomDropDown';
+import { CustomButton } from '../../../components/CustomButton';
 import { memo } from 'react';
-import { useArrivalTime } from '../../hooks/useArrivalTime';
+import { useArrivalTime } from '../../../hooks/useArrivalTime';
 
 export const VehicleSelectionSheet = ({
   handleBackPress,
@@ -50,7 +50,7 @@ export const VehicleSelectionSheet = ({
         onPress={() => {
           setVehicleType('Auto');
           setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef.current?.close();
+          bottomSheetRef?.current?.close();
         }}
         vehicleType={vehicleType}
         distance={distanceInfo?.distance}
@@ -64,7 +64,7 @@ export const VehicleSelectionSheet = ({
         onPress={() => {
           setVehicleType('Car');
           setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef.current?.close();
+          bottomSheetRef?.current?.close();
         }}
         vehicleType={vehicleType}
         distance={distanceInfo?.distance}
@@ -92,7 +92,7 @@ export const VehicleSelectionSheet = ({
         buttonTextStyle={styles.movePinButtonText}
         onPress={() => {
           setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef.current?.close();
+          bottomSheetRef?.current?.close();
         }}
       />
     </View>

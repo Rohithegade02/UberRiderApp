@@ -1,4 +1,4 @@
-import BottomSheet from '@gorhom/bottom-sheet';
+import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { ImageProps, StyleProp, TextStyle } from 'react-native';
 import {
   GooglePlaceData,
@@ -46,6 +46,7 @@ export interface BookingScreenProps {
   pickupLocationCords?: {
     latitude: number;
     longitude: number;
+    address: string;
   } | null;
   vehicleLocationCords?: {
     latitude: number;
@@ -61,7 +62,7 @@ export interface BookingScreenProps {
   routeCoordinates?: any;
   vehicleType?: string;
   setVehicleType: (vehicleType: string) => void;
-  bottomSheetRef?: React.RefObject<BottomSheet> | null;
+  bottomSheetRef?: React.RefObject<BottomSheetMethods>;
   rideState: RideState;
   setRideState: (rideState: RideState) => void;
   distanceInfo?: DistanceInfo | null;
@@ -74,6 +75,7 @@ export interface BookingScreenProps {
   pickupAddress?: string;
   // index of the last reached point on route for trimming polyline
   routeProgressIndex?: number;
+  onConfirmRide?: () => void | undefined;
 }
 
 //Rider Input Props
@@ -104,7 +106,7 @@ export interface VehicleSelectionSheetProps {
   handleBackPress: () => void;
   vehicleType: string;
   setVehicleType: (vehicleType: string) => void;
-  bottomSheetRef: React.RefObject<BottomSheet> | null;
+  bottomSheetRef: React.RefObject<BottomSheetMethods>;
   rideState: RideState;
   setRideState: (rideState: RideState) => void;
   distanceInfo: DistanceInfo | null;
@@ -118,10 +120,11 @@ export interface VehicleSelectionCardProps {
   vehicleType: string;
   distance?: string;
   duration?: string;
+  formattedTime?: string;
 }
 
 export interface ConfirmationSheetProps {
   handleBackPress: () => void;
-  onConfirm: () => void;
-  pickupAddress: string;
+  onConfirm?: () => void;
+  pickupAddress?: string;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal } from 'react-native';
-import { Colors } from '../../constants';
-import { CustomButton } from '../../components/CustomButton';
+import { Colors } from '../../../constants';
 
 interface RideCompletedModalProps {
   visible: boolean;
@@ -10,8 +9,8 @@ interface RideCompletedModalProps {
 
 const RideCompletedModal = ({
   visible,
-  onDismiss,
-}: RideCompletedModalProps) => {
+}: // onDismiss,
+RideCompletedModalProps) => {
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={styles.modalWrapper}>
@@ -20,7 +19,7 @@ const RideCompletedModal = ({
           <Text style={styles.modalSubtitle}>
             Please proceed to pay the fare and exit the vehicle.
           </Text>
-          <CustomButton label="Dismiss" onPress={onDismiss} />
+          {/* <CustomButton onPress={onDismiss} /> */}
         </View>
       </View>
     </Modal>

@@ -1,13 +1,13 @@
 import { View } from 'react-native';
 import React from 'react';
-import MapView, { Circle, Polyline, Marker } from 'react-native-maps';
-import RideSheet from './RideSheet';
-import ConfirmationSheet from './ConfirmationSheet';
+import MapView, { Circle, Polyline, Marker, LatLng } from 'react-native-maps';
+import RideSheet from './components/RideSheet';
+import ConfirmationSheet from './components/ConfirmationSheet';
 import { styles } from './styles';
 import { BookingScreenProps, RideState } from './types';
 import { Colors } from '../../constants';
 import { AnimatingPolylineComponent } from '../../utils/animatePolyline';
-import RideCompletedModal from './RideCompletedModal';
+import RideCompletedModal from './components/RideCompletedModal';
 
 // Booking  Presentation Screen Component
 export const BookingScreen = ({
@@ -31,7 +31,6 @@ export const BookingScreen = ({
   onConfirmRide,
   onPickupLocationSet,
   pickupLocationCords,
-  vehicleAnimatedRegion,
   vehicleLocationCords,
   routeProgressIndex,
 }: BookingScreenProps) => {
@@ -113,7 +112,7 @@ export const BookingScreen = ({
         {/* Draggable pickup pin in confirm-pickup state */}
         {rideState === RideState.CONFIRMING_PICKUP && (
           <Marker
-            coordinate={pickupLocationCords ?? currentLocationCords}
+            coordinate={pickupLocationCords ?? (currentLocationCords as LatLng)}
             draggable
             onDragEnd={e => onPickupLocationSet?.(e.nativeEvent.coordinate)}
           />

@@ -1,19 +1,18 @@
 import React, { useRef } from 'react';
 import { View, Text } from 'react-native';
-import { styles } from './styles';
-import { CustomIcon } from '../../components/CustomIcon';
-import { Colors } from '../../constants';
-import { BookingScreenText } from './constants';
-import { ConfirmationSheetProps } from './types';
-import { CustomButton } from '../../components/CustomButton';
-import { CustomInput } from '../../components/CustomInput';
+import { styles } from '../styles';
+import { CustomIcon } from '../../../components/CustomIcon';
+import { Colors } from '../../../constants';
+import { BookingScreenText } from '../constants';
+import { ConfirmationSheetProps } from '../types';
+import { CustomButton } from '../../../components/CustomButton';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
 const ConfirmationSheet = ({
   handleBackPress,
   onConfirm,
-  pickupAddress,
-}: ConfirmationSheetProps) => {
+}: // pickupAddress,
+ConfirmationSheetProps) => {
   // reference for BottomSheet (not strictly needed but kept for consistency)
   const bottomSheetRef = useRef<BottomSheet>(null);
 

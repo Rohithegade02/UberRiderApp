@@ -5,7 +5,7 @@ export interface CustomButtonProps {
   buttonText: string;
   buttonStyle: StyleProp<ViewStyle>;
   buttonTextStyle: StyleProp<TextStyle>;
-  onPress: () => void;
+  onPress?: () => void;
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
