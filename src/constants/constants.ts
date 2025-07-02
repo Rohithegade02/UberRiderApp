@@ -32,4 +32,8 @@ export enum Colors {
   searchHistoryText = '#bebebe',
   greenBackground = '#2C5F39',
   markerRed = '#7F0000',
+  markerGray = '#484848',
+  markerGreen = '#00A884',
+  markerDarkGreen = '#00A88455',
+  itemGraySeparator = '#2C3E50',
 }

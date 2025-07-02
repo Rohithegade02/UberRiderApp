@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { RegularFont12 } from '../../constants';
+import { Colors, RegularFont12 } from '../../constants';
 import { Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -14,11 +14,11 @@ export const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#2C3E50',
+    backgroundColor: Colors.itemGraySeparator,
   },
   dividerText: {
     ...RegularFont12,
-    color: '#2C3E50',
+    color: Colors.itemGraySeparator,
     marginHorizontal: width * 0.01,
   },
 });

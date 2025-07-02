@@ -63,7 +63,7 @@ export const BookingScreen = ({
         {routeCoordinates.length > 0 && (
           <Polyline
             coordinates={routeCoordinates.slice(routeProgressIndex)}
-            strokeColor="#666"
+            strokeColor={Colors.markerGray}
             strokeWidth={5}
           />
         )}
@@ -79,9 +79,9 @@ export const BookingScreen = ({
           <Circle
             center={vehicleLocationCords}
             radius={50}
-            strokeColor="#00A884"
+            strokeColor={Colors.markerGreen}
             strokeWidth={5}
-            fillColor="#00A88455"
+            fillColor={Colors.markerDarkGreen}
             zIndex={2}
           />
         )}
@@ -90,9 +90,9 @@ export const BookingScreen = ({
           <Circle
             center={currentLocationCords}
             radius={50}
-            strokeColor="#484848"
+            strokeColor={Colors.markerGray}
             strokeWidth={5}
-            fillColor="#fff"
+            fillColor={Colors.white}
             zIndex={1}
           />
         )}
@@ -102,9 +102,9 @@ export const BookingScreen = ({
           <Circle
             center={destinationLocationCords}
             radius={50}
-            strokeColor="#484848"
+            strokeColor={Colors.markerGray}
             strokeWidth={5}
-            fillColor="#fff"
+            fillColor={Colors.white}
             zIndex={1}
           />
         )}
@@ -131,7 +131,6 @@ export const BookingScreen = ({
           )}
       </MapView>
 
-      {/* Bottom Sheets */}
       {rideState === RideState.CONFIRMING_PICKUP ? (
         <ConfirmationSheet
           handleBackPress={handleBackPress}
