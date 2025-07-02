@@ -17,6 +17,13 @@ export enum RideState {
   SELECTING_DESTINATION,
   SELECTING_VEHICLE,
   CONFIRMING_PICKUP,
+  RIDE_STARTED,
+  RIDE_COMPLETED,
+}
+
+export interface DistanceInfo {
+  distance: string;
+  duration: string;
 }
 
 // Booking Screen Props
@@ -36,6 +43,14 @@ export interface BookingScreenProps {
     latitude: number;
     longitude: number;
   } | null;
+  pickupLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
+  vehicleLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
   handleBackPress: () => void;
 
   // New props for custom autocomplete
@@ -49,6 +64,16 @@ export interface BookingScreenProps {
   bottomSheetRef?: React.RefObject<BottomSheet> | null;
   rideState: RideState;
   setRideState: (rideState: RideState) => void;
+  distanceInfo?: DistanceInfo | null;
+  // Callback when user sets pickup location by moving the pin
+  onPickupLocationSet?: (coords: {
+    latitude: number;
+    longitude: number;
+  }) => void;
+  // Address string for the currently selected pickup location
+  pickupAddress?: string;
+  // index of the last reached point on route for trimming polyline
+  routeProgressIndex?: number;
 }
 
 //Rider Input Props
@@ -80,6 +105,9 @@ export interface VehicleSelectionSheetProps {
   vehicleType: string;
   setVehicleType: (vehicleType: string) => void;
   bottomSheetRef: React.RefObject<BottomSheet> | null;
+  rideState: RideState;
+  setRideState: (rideState: RideState) => void;
+  distanceInfo: DistanceInfo | null;
 }
 export interface VehicleSelectionCardProps {
   vehicleName: string;
@@ -88,9 +116,12 @@ export interface VehicleSelectionCardProps {
   vehicleDropOffTime: string;
   onPress: () => void;
   vehicleType: string;
+  distance?: string;
+  duration?: string;
 }
 
 export interface ConfirmationSheetProps {
   handleBackPress: () => void;
   onConfirm: () => void;
+  pickupAddress: string;
 }

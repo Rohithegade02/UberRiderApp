@@ -1,9 +1,10 @@
 import { View } from 'react-native';
 import React from 'react';
-import MapView, { Circle, Polyline } from 'react-native-maps';
+import MapView, { Circle, Polyline, Marker } from 'react-native-maps';
 import RideSheet from './RideSheet';
+import ConfirmationSheet from './ConfirmationSheet';
 import { styles } from './styles';
-import { BookingScreenProps } from './types';
+import { BookingScreenProps, RideState } from './types';
 import { Colors } from '../../constants';
 import { AnimatingPolylineComponent } from '../../utils/animatePolyline';
 
@@ -25,7 +26,26 @@ export const BookingScreen = ({
   setVehicleType,
   rideState,
   setRideState,
+  distanceInfo,
+  onConfirmRide,
+  onPickupLocationSet,
+  pickupLocationCords,
+  vehicleAnimatedRegion,
+  vehicleLocationCords,
+  routeProgressIndex,
 }: BookingScreenProps) => {
+  console.log('rideState', rideState);
+
+  // Center the map on the user's current location
+  const mapRegion = currentLocationCords
+    ? {
+        latitude: currentLocationCords.latitude,
+        longitude: currentLocationCords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      }
+    : undefined;
+
   return (
     <View style={styles.container}>
       {/* Map View */}
@@ -36,11 +56,13 @@ export const BookingScreen = ({
         followsUserLocation
         userInterfaceStyle="dark"
         style={styles.map}
+        cacheEnabled
+        initialRegion={mapRegion}
       >
         {/* Static Polyline (background) */}
         {routeCoordinates.length > 0 && (
           <Polyline
-            coordinates={routeCoordinates}
+            coordinates={routeCoordinates.slice(routeProgressIndex)}
             strokeColor="#666"
             strokeWidth={5}
           />
@@ -48,11 +70,23 @@ export const BookingScreen = ({
 
         {/* Animated Polyline */}
         {routeCoordinates.length > 0 && (
-          <AnimatingPolylineComponent Direction={routeCoordinates} />
+          <AnimatingPolylineComponent
+            Direction={routeCoordinates.slice(routeProgressIndex)}
+          />
         )}
-
+        {/* Moving vehicle circle when ride started */}
+        {rideState === RideState.RIDE_STARTED && vehicleLocationCords && (
+          <Circle
+            center={vehicleLocationCords}
+            radius={50}
+            strokeColor="#00A884"
+            strokeWidth={5}
+            fillColor="#00A88455"
+            zIndex={2}
+          />
+        )}
         {/* Current Location Marker */}
-        {currentLocationCords && (
+        {rideState !== RideState.RIDE_STARTED && currentLocationCords && (
           <Circle
             center={currentLocationCords}
             radius={50}
@@ -75,6 +109,15 @@ export const BookingScreen = ({
           />
         )}
 
+        {/* Draggable pickup pin in confirm-pickup state */}
+        {rideState === RideState.CONFIRMING_PICKUP && (
+          <Marker
+            coordinate={pickupLocationCords ?? currentLocationCords}
+            draggable
+            onDragEnd={e => onPickupLocationSet?.(e.nativeEvent.coordinate)}
+          />
+        )}
+
         {/* Fallback Polyline when no route coordinates */}
         {routeCoordinates.length === 0 &&
           currentLocationCords &&
@@ -88,24 +131,33 @@ export const BookingScreen = ({
           )}
       </MapView>
 
-      {/* Ride Bottom Sheet */}
-      <RideSheet
-        currentLocation={currentLocation}
-        destinationLocation={destinationLocation}
-        setCurrentLocation={setCurrentLocation}
-        setDestinationLocation={setDestinationLocation}
-        handleBackPress={handleBackPress}
-        destinationInput={destinationInput}
-        handleDestinationInputChange={handleDestinationInputChange}
-        predictions={predictions}
-        handlePredictionPress={handlePredictionPress}
-        currentLocationCords={currentLocationCords}
-        destinationLocationCords={destinationLocationCords}
-        vehicleType={vehicleType}
-        setVehicleType={setVehicleType}
-        rideState={rideState}
-        setRideState={setRideState}
-      />
+      {/* Bottom Sheets */}
+      {rideState === RideState.CONFIRMING_PICKUP ? (
+        <ConfirmationSheet
+          handleBackPress={handleBackPress}
+          onConfirm={onConfirmRide}
+          pickupAddress={pickupLocationCords?.address}
+        />
+      ) : (
+        <RideSheet
+          currentLocation={currentLocation}
+          destinationLocation={destinationLocation}
+          setCurrentLocation={setCurrentLocation}
+          setDestinationLocation={setDestinationLocation}
+          handleBackPress={handleBackPress}
+          destinationInput={destinationInput}
+          handleDestinationInputChange={handleDestinationInputChange}
+          predictions={predictions}
+          handlePredictionPress={handlePredictionPress}
+          currentLocationCords={currentLocationCords}
+          destinationLocationCords={destinationLocationCords}
+          vehicleType={vehicleType}
+          setVehicleType={setVehicleType}
+          rideState={rideState}
+          setRideState={setRideState}
+          distanceInfo={distanceInfo}
+        />
+      )}
     </View>
   );
 };

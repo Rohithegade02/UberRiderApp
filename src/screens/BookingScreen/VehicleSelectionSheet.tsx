@@ -11,6 +11,8 @@ import {
 import { Text } from 'react-native';
 import { CustomDropDown } from '../../components/CustomDropDown';
 import { CustomButton } from '../../components/CustomButton';
+import { memo } from 'react';
+import { useArrivalTime } from '../../hooks/useArrivalTime';
 
 export const VehicleSelectionSheet = ({
   handleBackPress,
@@ -18,7 +20,11 @@ export const VehicleSelectionSheet = ({
   setVehicleType,
   bottomSheetRef,
   setRideState,
+  distanceInfo,
 }: VehicleSelectionSheetProps) => {
+  const { formattedTime, formattedDuration } = useArrivalTime(
+    distanceInfo?.duration,
+  );
   return (
     <View>
       <View style={styles.bottomSheetHeaderContainer}>
@@ -35,6 +41,7 @@ export const VehicleSelectionSheet = ({
         <View />
       </View>
       <View style={styles.destinationDivider} />
+
       <VehicleSelectionCard
         vehicleName="Auto"
         vehicleImage={IMAGE.autoImage}
@@ -46,6 +53,8 @@ export const VehicleSelectionSheet = ({
           bottomSheetRef.current?.close();
         }}
         vehicleType={vehicleType}
+        distance={distanceInfo?.distance}
+        duration={formattedDuration}
       />
       <VehicleSelectionCard
         vehicleName="Car"
@@ -58,6 +67,9 @@ export const VehicleSelectionSheet = ({
           bottomSheetRef.current?.close();
         }}
         vehicleType={vehicleType}
+        distance={distanceInfo?.distance}
+        duration={formattedDuration}
+        formattedTime={formattedTime}
       />
       <View style={styles.destinationDivider} />
       <CustomDropDown
@@ -88,29 +100,39 @@ export const VehicleSelectionSheet = ({
   );
 };
 
-const VehicleSelectionCard = ({
-  vehicleName,
-  vehicleImage,
-  vehiclePrice,
-  vehicleDropOffTime,
-  onPress,
-  vehicleType,
-}: VehicleSelectionCardProps) => {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={
-        vehicleType === vehicleName
-          ? styles.vehicleSelectionCardActive
-          : styles.vehicleSelectionCard
-      }
-    >
-      <Image source={vehicleImage} style={styles.vehicleImage} />
-      <View style={styles.vehicleTextContainer}>
-        <Text style={styles.vehicleName}>{vehicleName}</Text>
-        <Text style={styles.vehicleDropOffTime}>{vehicleDropOffTime}</Text>
-      </View>
-      <Text style={styles.vehiclePrice}>₹ {vehiclePrice}</Text>
-    </Pressable>
-  );
-};
+const VehicleSelectionCard = memo(
+  ({
+    vehicleName,
+    vehicleImage,
+    vehiclePrice,
+    // vehicleDropOffTime,
+    onPress,
+    vehicleType,
+    distance,
+    duration,
+    formattedTime,
+  }: VehicleSelectionCardProps) => {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={
+          vehicleType === vehicleName
+            ? styles.vehicleSelectionCardActive
+            : styles.vehicleSelectionCard
+        }
+      >
+        <Image source={vehicleImage} style={styles.vehicleImage} />
+        <View style={styles.vehicleTextContainer}>
+          <Text style={styles.vehicleName}>{vehicleName}</Text>
+          <Text style={styles.vehicleDropOffTime}>{formattedTime}</Text>
+          {distance && duration && (
+            <Text style={styles.vehicleDropOffTime}>
+              {distance} • {duration}
+            </Text>
+          )}
+        </View>
+        <Text style={styles.vehiclePrice}>₹ {vehiclePrice}</Text>
+      </Pressable>
+    );
+  },
+);

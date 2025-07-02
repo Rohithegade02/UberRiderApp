@@ -22,4 +22,5 @@ export interface CustomInputProps {
   textInputMaxLength?: number;
   placeholderTextStyle?: StyleProp<TextStyle>;
   autoFocus?: boolean;
+  editable?: boolean;
 }

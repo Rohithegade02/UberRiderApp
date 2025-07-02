@@ -5,11 +5,7 @@ import { styles } from './styles';
 import { Colors } from '../../constants';
 import { CustomIcon } from '../../components/CustomIcon';
 import { CustomDropDown } from '../../components/CustomDropDown';
-import {
-  BookingScreenProps,
-  DestionationSelectionProps,
-  VehicleSelectionSheetProps,
-} from './types';
+import { BookingScreenProps, DestionationSelectionProps } from './types';
 import RiderInput from './RiderInput';
 import { BookingScreenText } from './constants';
 import { CustomButton } from '../../components/CustomButton';
@@ -31,28 +27,32 @@ const RideSheet = ({
   setVehicleType,
   rideState,
   setRideState,
+  distanceInfo,
 }: BookingScreenProps) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  // state to track current snap point
-  const [currentSnapIndex, setCurrentSnapIndex] = useState(0);
+  // Add this for position tracking
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
     setCurrentSnapIndex(index);
   }, []);
+
+  // state to track current snap point
+  const [currentSnapIndex, setCurrentSnapIndex] = useState(0);
 
   // Function to get title based on snap point
   const getTitle = () => {
     switch (currentSnapIndex) {
       case 0: // 30% snap point
+        return '';
+      case 1: // 60% snap point (destination selection)
         return BookingScreenText.setDestionation;
-      case 1: // 100% snap point
+      case 2: // 100% snap point (ride plan / vehicle selection)
         return BookingScreenText.planYourRide;
       default:
-        return BookingScreenText.planYourRide;
+        return '';
     }
   };
 
@@ -65,9 +65,10 @@ const RideSheet = ({
   return (
     <BottomSheet
       ref={bottomSheetRef}
+      // Added middle snap-point so indices 0-2 are valid
       snapPoints={['30%', '100%']}
       onChange={handleSheetChanges}
-      index={currentLocationCords && destinationLocationCords ? 2 : 1}
+      index={currentLocationCords && destinationLocationCords ? 1 : 0}
       enablePanDownToClose={false}
       backgroundStyle={{ backgroundColor: Colors.lightBlack }}
       handleIndicatorStyle={styles.handleIndicatorStyle}
@@ -81,20 +82,23 @@ const RideSheet = ({
             bottomSheetRef={bottomSheetRef}
             rideState={rideState}
             setRideState={setRideState}
+            distanceInfo={distanceInfo}
           />
         ) : (
           <>
-            <View style={styles.bottomSheetHeaderContainer}>
-              <CustomIcon
-                name="arrow-back"
-                size={24}
-                color={Colors.textwhite}
-                iconFamily="Ionicons"
-                onPress={handleBackPress}
-              />
-              <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
-              <View />
-            </View>
+            {currentSnapIndex !== 0 && (
+              <View style={styles.bottomSheetHeaderContainer}>
+                <CustomIcon
+                  name="arrow-back"
+                  size={24}
+                  color={Colors.textwhite}
+                  iconFamily="Ionicons"
+                  onPress={handleBackPress}
+                />
+                <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
+                <View />
+              </View>
+            )}
             {currentSnapIndex === 1 && (
               <View>
                 <DestionationSelection handlePinLocation={handlePinLocation} />
