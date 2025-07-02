@@ -34,8 +34,6 @@ export const BookingScreen = ({
   vehicleLocationCords,
   routeProgressIndex,
 }: BookingScreenProps) => {
-  console.log('rideState', rideState);
-
   // Center the map on the user's current location
   const mapRegion = currentLocationCords
     ? {

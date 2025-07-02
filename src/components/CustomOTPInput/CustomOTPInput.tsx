@@ -30,7 +30,6 @@ export const CustomOTPInput = ({
       // Focus logic would go here if using refs
     }
   };
-  console.log('otpValue', otpValue);
 
   return (
     <View style={[styles.container, otpContainerStyle]}>

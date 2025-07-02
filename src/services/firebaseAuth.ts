@@ -33,8 +33,6 @@ export const sendOTP = async (phoneNumber: string): Promise<OTPResponse> => {
       );
     }
 
-    console.log('Sending OTP to:', phoneNumber);
-
     // Send verification code
     const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
 
@@ -85,12 +83,9 @@ export const verifyOTP = async (code: string): Promise<VerifyResponse> => {
     if (!confirmationResult) {
       throw new Error('No verification in progress. Please request OTP first.');
     }
-    console.log('Verifying OTP code:', code);
     if (!code || code.length !== 6) {
       throw new Error('Please enter a valid 6-digit code');
     }
-
-    console.log('Verifying OTP code:', code);
 
     // Confirm the code
     const credential = await confirmationResult.confirm(code);

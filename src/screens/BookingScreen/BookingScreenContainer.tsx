@@ -16,47 +16,54 @@ import {
   fetchDirections,
   fetchDistanceMatrix,
 } from '../../services';
-import { RideState, DistanceInfo } from './types';
+import { RideState } from './types';
 import { AnimatedRegion } from 'react-native-maps';
+import {
+  useBookingStore,
+  useRouteCoordinatesStore,
+  useRouteDetailsStore,
+} from '../../store';
 
 // Booking Screen Container Component
 export const BookingScreenContainer = () => {
-  const [currentLocation, setCurrentLocation] = useState('');
-  const [destinationLocation, setDestinationLocation] = useState('');
-  const [vehicleType, setVehicleType] = useState('');
-  const [currentLocationCords, setCurrentLocationCords] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
-  const [destinationLocationCords, setDestinationLocationCords] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
-  const [routeCoordinates, setRouteCoordinates] = useState<any>([]);
-  const [rideState, setRideState] = useState<RideState>(RideState.IDLE);
-  const [distanceInfo, setDistanceInfo] = useState<DistanceInfo | null>(null);
+  const {
+    currentLocation,
+    setCurrentLocation,
+    destinationLocation,
+    setDestinationLocation,
+    distanceInfo,
+    setDistanceInfo,
+    vehicleType,
+    setVehicleType,
+    rideState,
+    setRideState,
+  } = useBookingStore();
 
-  // Live location of the vehicle/user while ride is in progress
-  const [vehicleLocationCords, setVehicleLocationCords] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
+  const {
+    currentLocationCords,
+    setCurrentLocationCords,
+    destinationLocationCords,
+    setDestinationLocationCords,
+    routeCoordinates,
+    setRouteCoordinates,
+    pickupLocationCords,
+    setPickupLocationCords,
+    vehicleLocationCords,
+    setVehicleLocationCords,
+  } = useRouteCoordinatesStore();
 
-  // index of the last reached point on the route – used to trim polyline
+  const {
+    pickupAddress,
+    setPickupAddress,
+    destinationInput,
+    setDestinationInput,
+  } = useRouteDetailsStore();
+
   const [routeProgressIndex, setRouteProgressIndex] = useState(0);
 
-  // Pickup location (may be adjusted by user via draggable pin)
-  const [pickupLocationCords, setPickupLocationCords] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
-  const [pickupAddress, setPickupAddress] = useState('');
-
-  console.log('vehicleType', vehicleType);
-  // New state for custom autocomplete
-
-  const [destinationInput, setDestinationInput] = useState('');
   const [predictions, setPredictions] = useState<GooglePlaceData[]>([]);
+
+  // Calculate distance between current location and destination location
   const calculateDistance = useCallback(async () => {
     if (currentLocationCords && destinationLocationCords) {
       try {
@@ -76,19 +83,21 @@ export const BookingScreenContainer = () => {
     } else {
       setDistanceInfo(null);
     }
-  }, [currentLocationCords, destinationLocationCords]);
+  }, [currentLocationCords, destinationLocationCords, setDistanceInfo]);
 
   // Calculate distance when coordinates change
   useEffect(() => {
     calculateDistance();
   }, [calculateDistance]);
 
+  // Handle back press
   const handleBackPress = useCallback(() => {
     if (rideState === RideState.SELECTING_DESTINATION) {
       goBack();
     }
   }, [rideState]);
 
+  // Debounced fetch autocomplete predictions
   const debouncedFetchPredictions = useDebounce(async (query: string) => {
     try {
       const data = await fetchAutocomplete(query);
@@ -103,6 +112,7 @@ export const BookingScreenContainer = () => {
     }
   }, 400);
 
+  // Handle destination input change
   const handleDestinationInputChange = (text: string) => {
     setDestinationInput(text);
     if (text.length > 2) {
@@ -112,6 +122,7 @@ export const BookingScreenContainer = () => {
     }
   };
 
+  // Handle prediction press
   const handlePredictionPress = useCallback(async (place: GooglePlaceData) => {
     try {
       const data = await fetchPlaceDetails(place.place_id);
@@ -161,6 +172,7 @@ export const BookingScreenContainer = () => {
     }
   }, [currentLocationCords, destinationLocationCords]);
 
+  // Get current location
   useEffect(() => {
     Geolocation.getCurrentPosition(
       position => {
@@ -175,6 +187,7 @@ export const BookingScreenContainer = () => {
     );
   }, [getAddressFromCords]);
 
+  // Handle set destination
   const handleSetDestination = (
     data: GooglePlaceData,
     details: GooglePlaceDetail | null,
@@ -188,18 +201,19 @@ export const BookingScreenContainer = () => {
 
   // Fetch route when both locations are available
   useEffect(() => {
-    if (
-      currentLocationCords &&
-      destinationLocationCords &&
-      GOOGLE_MAP_API_KEY
-    ) {
+    if (currentLocationCords && destinationLocationCords) {
       getDirections().then(coordinates => {
         if (coordinates) {
           setRouteCoordinates(coordinates);
         }
       });
     }
-  }, [currentLocationCords, destinationLocationCords, getDirections]);
+  }, [
+    currentLocationCords,
+    destinationLocationCords,
+    getDirections,
+    setRouteCoordinates,
+  ]);
 
   const handleVehicleSelect = useCallback(
     (type: string) => {
@@ -212,7 +226,14 @@ export const BookingScreenContainer = () => {
         setPickupAddress(currentLocation);
       }
     },
-    [currentLocation, currentLocationCords],
+    [
+      currentLocation,
+      currentLocationCords,
+      setPickupAddress,
+      setPickupLocationCords,
+      setRideState,
+      setVehicleType,
+    ],
   );
 
   // Handle updated pickup location from draggable pin

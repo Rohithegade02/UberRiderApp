@@ -29,8 +29,6 @@ export const LoginScreenContainer = memo(() => {
       // Format phone number with country code (+91 for India)
       const formattedPhone = formatPhoneNumber(phoneNumber, '+91');
 
-      console.log('Sending OTP to:', formattedPhone);
-
       // Send OTP using Firebase
       const result = await sendOTP(formattedPhone);
 
