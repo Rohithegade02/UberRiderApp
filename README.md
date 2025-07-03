@@ -40,6 +40,21 @@ A work-in-progress Uber-like rider application built with **React Native + TypeS
    • Manifest icon reference fixed to `@mipmap/ic_launcher` (round icon pending).  
    • [.gitignore](cci:7://file:///Users/rohit/Native_Builds/UberRiderApp/.gitignore:0:0-0:0) extended to ignore `.env` and `google-services.json`.
 
+## 🚗 Ride workflow
+
+The app models a ride as a finite-state workflow (see `RideState` enum):
+
+| State                   | Description                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| `IDLE`                  | User has not started a ride request yet. Home screen idle.                           |
+| `SELECTING_DESTINATION` | User is choosing the drop-off location on the map or via search.                     |
+| `SELECTING_VEHICLE`     | Fare estimates & vehicle types (Auto, Car, etc.) are shown – user picks one.         |
+| `CONFIRMING_PICKUP`     | Final confirmation screen (payment method, promo, notes) before requesting a driver. |
+| `RIDE_STARTED`          | Driver accepted; map tracks the ride in real time until drop-off.                    |
+| `RIDE_COMPLETED`        | Trip is finished; receipt & rating shown, then the workflow returns to `IDLE`.       |
+
+These discrete states drive both UI rendering and backend requests, ensuring clear transitions and easier debugging.
+
 ---
 
 ## 🗂 Coding Patterns (high-level)
