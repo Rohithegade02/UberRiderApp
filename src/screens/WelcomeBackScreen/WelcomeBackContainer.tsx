@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import WelcomeBackScreen from './WelcomeBackScreen';
 import { navigate } from '../../navigation/NavigationUtil';
-import { STACK_ROUTES } from '../../routes';
+import { STACK_ROUTES, TAB_ROUTES } from '../../routes';
 import { sendOTP, verifyOTP } from '../../services';
 import { Alert } from 'react-native';
 import { WelcomeBackScreenParams } from './types';
@@ -48,8 +48,6 @@ export const WelcomeBackContainer = memo(
         const result = await verifyOTP(otpValue);
 
         console.log(result);
-        navigate(STACK_ROUTES.TabNavigator);
-
         await setItem('token', result.success);
       } catch (error) {
         Alert.alert('Error', 'Verification failed. Please try again.');

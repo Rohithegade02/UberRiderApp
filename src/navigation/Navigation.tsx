@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './NavigationUtil';
@@ -19,7 +19,7 @@ type AuthState = {
 };
 
 const Navigation: React.FC = () => {
-  const [authState, setAuthState] = React.useState<AuthState>({
+  const [authState, setAuthState] = useState<AuthState>({
     isLoading: true,
     isAuthenticated: false,
     token: null,
@@ -27,7 +27,7 @@ const Navigation: React.FC = () => {
 
   const { getItem } = useAsyncStorage();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const checkAuthState = async () => {
       try {
         const token = await getItem('token');
@@ -49,6 +49,28 @@ const Navigation: React.FC = () => {
 
     checkAuthState();
   }, []);
+
+  // Listen for storage changes to update auth state
+  React.useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const token = await getItem('token');
+        const isAuthenticated = !!token;
+
+        if (isAuthenticated !== authState.isAuthenticated) {
+          setAuthState(prev => ({
+            ...prev,
+            isAuthenticated,
+            token,
+          }));
+        }
+      } catch (error) {
+        console.error('Error checking auth state:', error);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [authState.isAuthenticated, getItem]);
 
   if (authState.isLoading) {
     return <SplashScreen />;
