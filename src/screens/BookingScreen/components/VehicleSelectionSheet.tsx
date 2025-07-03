@@ -11,7 +11,7 @@ import {
 import { Text } from 'react-native';
 import { CustomDropDown } from '../../../components/CustomDropDown';
 import { CustomButton } from '../../../components/CustomButton';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useArrivalTime } from '../../../hooks/useArrivalTime';
 
 export const VehicleSelectionSheet = ({
@@ -25,6 +25,24 @@ export const VehicleSelectionSheet = ({
   const { formattedTime, formattedDuration } = useArrivalTime(
     distanceInfo?.duration,
   );
+
+  const handleCar = useCallback(() => {
+    setVehicleType('Car');
+    setRideState(RideState.CONFIRMING_PICKUP);
+    bottomSheetRef?.current?.close();
+  }, [bottomSheetRef, setRideState, setVehicleType]);
+
+  const handleAuto = useCallback(() => {
+    setVehicleType('Auto');
+    setRideState(RideState.CONFIRMING_PICKUP);
+    bottomSheetRef?.current?.close();
+  }, [bottomSheetRef, setRideState, setVehicleType]);
+
+  const handleConfirm = useCallback(() => {
+    setRideState(RideState.CONFIRMING_PICKUP);
+    bottomSheetRef?.current?.close();
+  }, [bottomSheetRef, setRideState]);
+
   return (
     <View>
       <View style={styles.bottomSheetHeaderContainer}>
@@ -47,11 +65,7 @@ export const VehicleSelectionSheet = ({
         vehicleImage={IMAGE.autoImage}
         vehiclePrice="100"
         vehicleDropOffTime="10:00 AM"
-        onPress={() => {
-          setVehicleType('Auto');
-          setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef?.current?.close();
-        }}
+        onPress={handleAuto}
         vehicleType={vehicleType}
         distance={distanceInfo?.distance}
         duration={formattedDuration}
@@ -61,11 +75,7 @@ export const VehicleSelectionSheet = ({
         vehicleImage={IMAGE.carImage}
         vehiclePrice="100"
         vehicleDropOffTime="10:00 AM"
-        onPress={() => {
-          setVehicleType('Car');
-          setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef?.current?.close();
-        }}
+        onPress={handleCar}
         vehicleType={vehicleType}
         distance={distanceInfo?.distance}
         duration={formattedDuration}
@@ -90,10 +100,7 @@ export const VehicleSelectionSheet = ({
         buttonText={BookingScreenText.confirmDestionation + ' ' + vehicleType}
         buttonStyle={styles.movePinButton}
         buttonTextStyle={styles.movePinButtonText}
-        onPress={() => {
-          setRideState(RideState.CONFIRMING_PICKUP);
-          bottomSheetRef?.current?.close();
-        }}
+        onPress={handleConfirm}
       />
     </View>
   );

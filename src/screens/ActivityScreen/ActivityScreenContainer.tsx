@@ -1,10 +1,5 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { ActivityScreen } from './ActivityScreen';
 
 export const ActivityScreenContainer = () => {
-  return (
-    <View>
-      <Text>ActivityScreenContainer</Text>
-    </View>
-  );
+  return <ActivityScreen />;
 };

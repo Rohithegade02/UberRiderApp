@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDebounce } from '../../hooks/useDebounce';
 import { BookingScreen } from './BookingScreen';
-import { goBack } from '../../navigation/NavigationUtil';
+import { goBack, navigate } from '../../navigation/NavigationUtil';
 import Geolocation from '@react-native-community/geolocation';
-import { GOOGLE_MAP_API_KEY } from '../../constants';
 import { decodePolyline } from '../../utils/decodePolyline';
 import {
   GooglePlaceData,
@@ -23,6 +22,7 @@ import {
   useRouteCoordinatesStore,
   useRouteDetailsStore,
 } from '../../store';
+import { STACK_ROUTES, TAB_ROUTES } from '../../routes';
 
 // Booking Screen Container Component
 export const BookingScreenContainer = () => {
@@ -59,9 +59,26 @@ export const BookingScreenContainer = () => {
     setDestinationInput,
   } = useRouteDetailsStore();
 
+  // State for route progress index
   const [routeProgressIndex, setRouteProgressIndex] = useState(0);
 
+  // State for predictions
   const [predictions, setPredictions] = useState<GooglePlaceData[]>([]);
+
+  // State for ride completed modal visibility
+  const [isRideCompletedModalVisible, setIsRideCompletedModalVisible] =
+    useState(false);
+
+  useEffect(() => {
+    if (rideState === RideState.RIDE_COMPLETED) {
+      setIsRideCompletedModalVisible(true);
+    }
+  }, [rideState]);
+
+  const handleRideCompletedModalDismiss = () => {
+    setIsRideCompletedModalVisible(false);
+    navigate(STACK_ROUTES.TabNavigator, { screen: TAB_ROUTES.Activity });
+  };
 
   // Calculate distance between current location and destination location
   const calculateDistance = useCallback(async () => {
@@ -185,7 +202,7 @@ export const BookingScreenContainer = () => {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
-  }, [getAddressFromCords]);
+  }, [getAddressFromCords, setCurrentLocationCords]);
 
   // Handle set destination
   const handleSetDestination = (
@@ -243,7 +260,7 @@ export const BookingScreenContainer = () => {
       // Update address for the pin location
       getAddressFromCords(coords.latitude, coords.longitude);
     },
-    [getAddressFromCords],
+    [getAddressFromCords, setPickupLocationCords],
   );
 
   const vehicleAnimatedRegion = useRef(
@@ -301,7 +318,13 @@ export const BookingScreenContainer = () => {
 
       simulationIndexRef.current += 1;
     }, 1500); // advance every 1.5s
-  }, [routeCoordinates, stopSimulatedRide, vehicleAnimatedRegion]);
+  }, [
+    routeCoordinates,
+    stopSimulatedRide,
+    vehicleAnimatedRegion,
+    setRideState,
+    setVehicleLocationCords,
+  ]);
 
   const handleConfirmRide = () => {
     setRideState(RideState.RIDE_STARTED);
@@ -359,6 +382,8 @@ export const BookingScreenContainer = () => {
       routeProgressIndex={routeProgressIndex}
       handleConfirmRide={handleConfirmRide}
       onConfirmRide={handleConfirmRide}
+      isRideCompletedModalVisible={isRideCompletedModalVisible}
+      handleRideCompletedModalDismiss={handleRideCompletedModalDismiss}
     />
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal } from 'react-native';
-import { Colors } from '../../../constants';
+import { BoldFont16, BoldFont20, Colors } from '../../../constants';
+import { CustomButton } from '../../../components/CustomButton';
 
 interface RideCompletedModalProps {
   visible: boolean;
@@ -9,17 +10,30 @@ interface RideCompletedModalProps {
 
 const RideCompletedModal = ({
   visible,
-}: // onDismiss,
-RideCompletedModalProps) => {
+  onDismiss,
+}: RideCompletedModalProps) => {
+  console.log('visible', onDismiss);
+
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal
+      visible={visible}
+      transparent
+      animationType="slide"
+      onRequestClose={onDismiss}
+      style={styles.modalWrapper}
+    >
       <View style={styles.modalWrapper}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Ride completed</Text>
           <Text style={styles.modalSubtitle}>
             Please proceed to pay the fare and exit the vehicle.
           </Text>
-          {/* <CustomButton onPress={onDismiss} /> */}
+          <CustomButton
+            onPress={onDismiss}
+            buttonText="Pay"
+            buttonStyle={styles.modalButton}
+            buttonTextStyle={styles.modalButtonText}
+          />
         </View>
       </View>
     </Modal>
@@ -34,6 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.6)',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 12,
   },
   modalContent: {
     backgroundColor: Colors.lightBlack,
@@ -42,14 +57,18 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   modalTitle: {
+    ...BoldFont20,
     color: Colors.textwhite,
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 8,
   },
   modalSubtitle: {
+    ...BoldFont16,
     color: Colors.textwhite,
-    marginBottom: 16,
-    textAlign: 'center',
+  },
+  modalButton: {
+    marginTop: 16,
+  },
+  modalButtonText: {
+    ...BoldFont16,
+    color: Colors.textwhite,
   },
 });

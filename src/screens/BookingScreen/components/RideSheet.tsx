@@ -4,7 +4,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { styles } from '../styles';
 import { Colors } from '../../../constants';
 import { CustomIcon } from '../../../components/CustomIcon';
-import { BookingScreenProps } from '../types';
+import { BookingScreenProps, RideState } from '../types';
 import { BookingScreenText } from '../constants';
 import { VehicleSelectionSheet } from './VehicleSelectionSheet';
 import { RidePlanSheet } from './RidePlanSheet';
@@ -59,6 +59,14 @@ const RideSheet = ({
     // move to 2nd snap index
     bottomSheetRef.current?.snapToIndex(2);
   }, []);
+
+  // Hide sheet once ride starts or is completed
+  if (
+    rideState === RideState.RIDE_STARTED ||
+    rideState === RideState.RIDE_COMPLETED
+  ) {
+    return null;
+  }
 
   // renders
   return (
