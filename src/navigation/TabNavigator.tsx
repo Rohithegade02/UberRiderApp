@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreenContainer } from '../screens/HomeScreen';
-import { PaymentScreenContainer } from '../screens/PaymentScreen';
 import { AccountScreenContainer } from '../screens/AccountScreen';
 import { ActivityScreenContainer } from '../screens/ActivityScreen';
 import { Colors } from '../constants';

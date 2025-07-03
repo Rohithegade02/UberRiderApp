@@ -19,6 +19,7 @@ const WelcomeBackScreen = ({
   loading,
   resendLoading,
 }: WelcomeBackScreenProps) => {
+  console.log('otpValue', otpValue.length !== 6);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>WelcomeBackScreen {name} .</Text>

@@ -30,21 +30,9 @@ export const LoginScreenContainer = memo(() => {
       const formattedPhone = formatPhoneNumber(phoneNumber, '+91');
 
       // Send OTP using Firebase
-      const result = await sendOTP(formattedPhone);
+      await sendOTP(formattedPhone);
 
-      if (result.success) {
-        Alert.alert('OTP Sent', `Verification code sent to ${formattedPhone}`, [
-          {
-            text: 'OK',
-            onPress: () => {
-              // Navigate to OTP verification screen
-              navigate(STACK_ROUTES.WelcomeBackScreen);
-            },
-          },
-        ]);
-      } else {
-        Alert.alert('Error', result.error);
-      }
+      navigate(STACK_ROUTES.WelcomeBackScreen, { phoneNumber });
     } catch (error) {
       console.error('Login error:', error);
       Alert.alert('Error', 'Something went wrong. Please try again.');

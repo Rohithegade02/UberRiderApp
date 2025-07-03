@@ -1,11 +1,11 @@
 import { ROUTE_API } from '../api';
-import { GOOGLE_MAP_API_KEY } from '../constants';
 
 // Fetch autocomplete predictions
 export const fetchAutocomplete = async (input: string) => {
+  console.log(process.env.GOOGLE_MAPS_API_KEY);
   try {
     const response = await fetch(
-      `${ROUTE_API.autocomplete}?input=${input}&key=${GOOGLE_MAP_API_KEY}`,
+      `${ROUTE_API.autocomplete}?input=${input}&key=${process.env.GOOGLE_MAPS_API_KEY}`,
     );
     const data = await response.json();
     return data;
@@ -18,7 +18,7 @@ export const fetchAutocomplete = async (input: string) => {
 export const fetchPlaceDetails = async (placeId: string) => {
   try {
     const response = await fetch(
-      `${ROUTE_API.details}?place_id=${placeId}&key=${GOOGLE_MAP_API_KEY}&fields=geometry`,
+      `${ROUTE_API.details}?place_id=${placeId}&key=${process.env.GOOGLE_MAPS_API_KEY}&fields=geometry`,
     );
     const data = await response.json();
     return data;
@@ -31,7 +31,7 @@ export const fetchPlaceDetails = async (placeId: string) => {
 export const fetchGeocode = async (latitude: number, longitude: number) => {
   try {
     const response = await fetch(
-      `${ROUTE_API.geocode}?latlng=${latitude},${longitude}&key=${GOOGLE_MAP_API_KEY}`,
+      `${ROUTE_API.geocode}?latlng=${latitude},${longitude}&key=${process.env.GOOGLE_MAPS_API_KEY}`,
     );
     const data = await response.json();
     return data;
@@ -47,7 +47,7 @@ export const fetchDirections = async (
 ) => {
   try {
     const response = await fetch(
-      `${ROUTE_API.directions}?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=${GOOGLE_MAP_API_KEY}`,
+      `${ROUTE_API.directions}?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=${process.env.GOOGLE_MAPS_API_KEY}`,
     );
     const data = await response.json();
     return data;
@@ -65,7 +65,7 @@ export const fetchDistanceMatrix = async (
     const response = await fetch(
       `${ROUTE_API.distanceMatrix}?origins=${origin.latitude},${origin.longitude}` +
         `&destinations=${destination.latitude},${destination.longitude}` +
-        `&key=${GOOGLE_MAP_API_KEY}&units=metric`,
+        `&key=${process.env.GOOGLE_MAPS_API_KEY}&units=metric`,
     );
 
     const data = await response.json();

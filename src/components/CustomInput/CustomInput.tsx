@@ -21,6 +21,8 @@ export const CustomInput = ({
   placeholderTextStyle,
   autoFocus,
   editable,
+  ref,
+  onKeyPress,
 }: CustomInputProps) => {
   return (
     <View style={styles.container}>
@@ -44,6 +46,8 @@ export const CustomInput = ({
         accessibilityRole="text"
         autoFocus={autoFocus}
         editable={editable}
+        ref={ref}
+        onKeyPress={onKeyPress}
       />
       {showTextInputError && (
         <Text style={styles.errorText}>{textInputError}</Text>

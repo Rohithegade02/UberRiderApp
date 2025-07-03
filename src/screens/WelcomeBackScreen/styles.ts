@@ -25,7 +25,9 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.otpInputBackground,
     borderColor: Colors.white,
   },
-  disabledContainerStyle: {},
+  disabledContainerStyle: {
+    opacity: 0.2,
+  },
   resendButton: {
     borderRadius: 16,
     paddingVertical: 14,
@@ -48,8 +50,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     width: '50%',
-    backgroundColor: Colors.grayBackground,
-    opacity: 0.5,
+    backgroundColor: Colors.textwhite,
+    opacity: 0.9,
     alignSelf: 'flex-end',
+    color: Colors.black,
   },
 });

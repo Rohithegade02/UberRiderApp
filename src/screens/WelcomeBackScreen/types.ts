@@ -15,3 +15,7 @@ export interface WelcomeBackOTPProps {
   loading: boolean;
   resendLoading: boolean;
 }
+
+export interface WelcomeBackScreenParams {
+  phoneNumber: string;
+}

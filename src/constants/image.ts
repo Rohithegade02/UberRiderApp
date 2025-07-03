@@ -3,4 +3,5 @@ export const IMAGE = {
   carImage: require('../assets/images/car.png'),
   autoImage: require('../assets/images/auto.png'),
   cashImage: require('../assets/images/cash.png'),
+  splashScreenLogo: require('../assets/images/Uber_Logo_White_RGB.png'),
 } as const;

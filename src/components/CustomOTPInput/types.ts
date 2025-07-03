@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle, TextInput } from 'react-native';
 
 export interface CustomOTPInputProps {
   otpValue: string;
@@ -7,4 +7,5 @@ export interface CustomOTPInputProps {
   maxLength?: number;
   otpContainerStyle?: StyleProp<ViewStyle>;
   otpInputLabelStyle?: StyleProp<TextStyle>;
+  ref?: React.RefObject<TextInput>;
 }

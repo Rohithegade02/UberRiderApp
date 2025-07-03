@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp, TextStyle, TextInput } from 'react-native';
 
 // Custom Input Props
 export interface CustomInputProps {
@@ -23,4 +23,6 @@ export interface CustomInputProps {
   placeholderTextStyle?: StyleProp<TextStyle>;
   autoFocus?: boolean;
   editable?: boolean;
+  ref?: React.RefObject<TextInput>;
+  onKeyPress?: (e: any) => void;
 }

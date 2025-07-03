@@ -9,14 +9,13 @@
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
 
         <meta-data
           android:name="com.google.android.geo.API_KEY"
-          android:value="AIzaSyDKn0d5I4uR6gUXSC8d7GAJ1umS54LnhMg"/>
+          android:value="${GOOGLE_MAPS_API_KEY}"/>
 
       <activity
         android:name=".MainActivity"
