@@ -3,10 +3,12 @@ import { StyleProp, ViewStyle } from 'react-native';
 export interface HomeScreenProps extends SearchHistoryProps {
   handleWhereTo: () => void;
   loading?: boolean;
+  handleSeeAll?: () => void;
 }
 export interface SearchHistoryProps {
   searchHistory?: string;
   loading?: boolean;
+  handleSeeAll?: () => void;
 }
 
 export interface PromoCardProps {
@@ -17,9 +19,9 @@ export interface PromoCardProps {
 }
 
 export interface HomeAdsProps {
-  homeAdsTitle: string;
-  homeAdsImage: string;
-  homeAdsButton: string;
+  homeAdsTitle?: string;
+  homeAdsImage?: string;
+  homeAdsButton?: string;
   loading?: boolean;
   homeAdsStyle?: StyleProp<ViewStyle>;
 }

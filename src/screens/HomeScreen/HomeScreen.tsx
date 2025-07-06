@@ -11,13 +11,14 @@ import { CustomHeader } from '../../components/CustomHeader';
 import { PromoCard } from './PromoCard';
 import { HomeAds } from './HomeAds';
 import { CustomLoader } from '../../components/CustomLoader';
-import ContentLoader, { Rect, Circle, Path } from 'react-content-loader/native';
+import { Rect } from 'react-content-loader/native';
 
 // Home Screen Presentational Component
 const HomeScreen = ({
   searchHistory,
   handleWhereTo,
   loading,
+  handleSeeAll,
 }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
@@ -27,7 +28,7 @@ const HomeScreen = ({
         <WhereToInput handleWhereTo={handleWhereTo} loading={loading} />
         {/* Search History */}
         <SearchHistory searchHistory={searchHistory} loading={loading} />
-        <Suggestions loading={loading} />
+        <Suggestions loading={loading} handleSeeAll={handleSeeAll} />
         <HomeAds loading={loading} />
       </View>
     </View>
@@ -98,7 +99,7 @@ const SearchHistory = memo(({ searchHistory, loading }: SearchHistoryProps) => {
 });
 
 // Suggestions
-const Suggestions = memo(({ loading }: SearchHistoryProps) => {
+const Suggestions = memo(({ loading, handleSeeAll }: SearchHistoryProps) => {
   if (loading) {
     return (
       <CustomLoader>
@@ -116,7 +117,7 @@ const Suggestions = memo(({ loading }: SearchHistoryProps) => {
         rightText={HomeScreenText.seeAll}
         // navigate to vehicle suggestions screen
         leftPress={() => {}}
-        rightPress={() => {}}
+        rightPress={handleSeeAll}
         leftTextStyle={styles.leftTextStyle}
         rightTextStyle={styles.rightTextStyle}
       />
