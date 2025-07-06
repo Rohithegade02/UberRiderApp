@@ -65,4 +65,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: Colors.lightBlack,
+    padding: 12,
+  },
 });

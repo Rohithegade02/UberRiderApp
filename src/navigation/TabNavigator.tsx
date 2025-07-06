@@ -8,7 +8,7 @@ import { AccountIcon } from './TabIcon';
 import { ActivityIcon } from './TabIcon';
 import { HomeIcon } from './TabIcon';
 import { PaymentIcon } from './TabIcon';
-import { ServiceScreenContainer } from '../screens/ServiceScreen';
+import ServicePage from '../screens/ServiceScreen';
 
 // Tab Navigator Component
 const Tab = createBottomTabNavigator();
@@ -37,7 +37,7 @@ export const TabNavigatorContainer = () => (
     />
     <Tab.Screen
       name={TAB_ROUTES.Service}
-      component={ServiceScreenContainer}
+      component={ServicePage}
       options={{
         tabBarLabel: 'Service',
         tabBarIcon: PaymentIcon,
