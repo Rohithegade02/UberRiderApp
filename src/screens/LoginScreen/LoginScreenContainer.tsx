@@ -5,6 +5,7 @@ import { STACK_ROUTES } from '../../routes';
 import { Alert } from 'react-native';
 import { validatePhoneNumber } from '../../utils/validatePhoneNumber';
 import { formatPhoneNumber } from '../../utils/formatPhoneNumber';
+import { sendOTP } from '../../services';
 
 // Login Screen Container Component
 export const LoginScreenContainer = memo(() => {

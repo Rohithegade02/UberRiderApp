@@ -18,7 +18,7 @@ export const CountryPhoneInput = memo(
     return (
       <View style={styles.countryPickerContainer}>
         <CountryPicker
-          countryCode={countryName || 'IN'}
+          countryCode={(countryName || 'IN') as any}
           withFilter
           withFlag
           // withCountryNameButton

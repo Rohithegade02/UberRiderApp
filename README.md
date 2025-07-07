@@ -67,6 +67,74 @@ These discrete states drive both UI rendering and backend requests, ensuring cle
    • Presentational components are responsible for rendering the UI. They are also responsible for handling user interactions.
    • Presentational components are also responsible for handling navigation and routing.
 
-User Experience
+### 🎨 UI/UX
 
-Optimizations
+- Smooth bottom sheet animations with React Native Reanimated
+- Custom loading states for all screens
+- Responsive design with custom components
+- Tab navigation with custom icons
+- Dark theme support
+
+## 🚀 Performance Optimizations
+
+### ⚡ Loading States
+
+- **Screen-specific loaders**: Each screen has its dedicated loader component
+  - `BookingLoader` - For ride booking flow
+  - `ActivityLoader` - For ride history
+  - `AccountLoader` - For profile section
+  - `HomeLoader` - For main dashboard
+  - `LoginLoader` - For authentication
+  - `ServiceLoader` - For service selection
+  - `WelcomeBackLoader` - For OTP verification
+
+### 🎯 Code Optimization
+
+- **Lazy Loading**: Components are lazy-loaded using `React.lazy()` and `Suspense`
+- **Memoization**:
+  - `React.memo()` for component re-render optimization
+  - `useCallback()` for function memoization
+  - `useMemo()` for expensive calculations
+- **State Management**: Zustand for lightweight, performant state management
+- **Debounced API Calls**: `useDebounce` hook for search autocomplete
+- **Efficient Animations**: React Native Reanimated with `entering`/`exiting` props
+
+### 📱 Memory & Performance
+
+- **Optimized Imports**: Tree-shaking friendly imports
+- **Image Optimization**: Centralized image constants
+- **AsyncStorage**: Efficient local data persistence
+- **Gesture Handling**: Optimized touch interactions with bottom sheets
+
+## 🛠️ Tech Stack
+
+### Core
+
+- **React Native** - Mobile framework
+- **TypeScript** - Type safety and developer experience
+- **React Navigation 6** - Navigation (Stack + Tab navigators)
+
+### State Management
+
+- **Zustand** - Lightweight state management
+- **AsyncStorage** - Local storage persistence
+
+### UI Components
+
+- **@gorhom/bottom-sheet** - Smooth bottom sheet interactions
+- **React Native Reanimated** - High-performance animations
+- **React Native Vector Icons** - Custom icon components
+- **React Native Maps** - Map integration
+
+### Backend Services
+
+- **Firebase Auth** - Phone number authentication
+- **Google Places API** - Address autocomplete
+- **Google Directions API** - Route calculation
+- **Google Geocoding API** - Address resolution
+
+### Development Tools
+
+- **Metro** - Bundler configuration
+- **Jest** - Testing framework
+- **ESLint + Prettier** - Code formatting and linting
