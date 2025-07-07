@@ -1,6 +1,7 @@
 import { ServiceScreen } from './ServiceScreen';
 import { useBookingStore } from '../../store/useBookingStore';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { IMAGE } from '../../constants';
 
 //ServiceScreen Container
 export const ServiceScreenContainer = () => {
@@ -13,5 +14,26 @@ export const ServiceScreenContainer = () => {
     },
     [setVehicleType],
   );
-  return <ServiceScreen handleVehicleType={handleVehicleType} />;
+
+  const servicePromoCardData = useMemo(
+    () => [
+      {
+        title: 'Ride',
+        image: IMAGE.carImage,
+        promo: true,
+      },
+      {
+        title: 'Auto',
+        image: IMAGE.autoImage,
+        promo: false,
+      },
+    ],
+    [],
+  );
+  return (
+    <ServiceScreen
+      handleVehicleType={handleVehicleType}
+      servicePromoCardData={servicePromoCardData}
+    />
+  );
 };

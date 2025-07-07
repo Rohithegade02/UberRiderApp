@@ -9,6 +9,8 @@ import {
 } from '../../constants';
 
 const { width, height } = Dimensions.get('window');
+
+// Home Screen Styles
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -186,5 +188,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.lightBlack,
     padding: 20,
+  },
+  itemSeparator: {
+    width: 16,
   },
 });

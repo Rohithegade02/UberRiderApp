@@ -8,6 +8,8 @@ import {
 } from '../../constants';
 
 const width = Dimensions.get('window').width;
+
+// Login Screen Styles
 export const styles = StyleSheet.create({
   container: {
     flex: 1,

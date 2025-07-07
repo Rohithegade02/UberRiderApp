@@ -4,6 +4,7 @@ import { styles } from './styles';
 import { CustomLoader } from '../../components/CustomLoader';
 import { Rect } from 'react-content-loader/native';
 
+// Activity Screen Loader
 const ActivityLoader = () => {
   return (
     <View style={styles.loaderContainer}>

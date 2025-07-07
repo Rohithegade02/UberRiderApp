@@ -4,26 +4,26 @@ import { styles } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ServicesText } from './constants';
 import { ServicePromoCardProps, ServiceScreenProps } from './types';
-import { IMAGE } from '../../constants';
 
-export const ServiceScreen = ({ handleVehicleType }: ServiceScreenProps) => {
+// Service Screen Presentational Component
+export const ServiceScreen = ({
+  handleVehicleType,
+  servicePromoCardData,
+}: ServiceScreenProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{ServicesText.title}</Text>
       <Text style={styles.subtitle}> {ServicesText.Subtitle} </Text>
       <View style={styles.promoCardContainer}>
-        <ServicePromoCardItem
-          title="Ride"
-          image={IMAGE.carImage}
-          promo={true}
-          onPress={() => handleVehicleType('Ride')}
-        />
-        <ServicePromoCardItem
-          title="Auto"
-          image={IMAGE.autoImage}
-          promo={false}
-          onPress={() => handleVehicleType('Auto')}
-        />
+        {servicePromoCardData.map((item, index) => (
+          <ServicePromoCardItem
+            key={index}
+            title={item.title}
+            image={item.image}
+            promo={item.promo}
+            onPress={() => handleVehicleType(item.title)}
+          />
+        ))}
       </View>
     </SafeAreaView>
   );

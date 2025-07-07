@@ -1,15 +1,29 @@
 import { Image, Text, View } from 'react-native';
 import { styles } from './styles';
-import { IMAGE } from '../../constants';
 import { PromoCardProps } from './types';
 import { HomeScreenText } from './constants';
 
 // Promo Card Presentational Component
-export const PromoCard = () => {
+export const PromoCard = ({
+  promoCardData,
+}: {
+  promoCardData: PromoCardProps[];
+}) => {
+  if (!promoCardData) {
+    return null;
+  }
   return (
     <View style={styles.promoCardContainer}>
-      <PromoCardItem title="Ride" image={IMAGE.carImage} promo={true} />
-      <PromoCardItem title="Auto" image={IMAGE.autoImage} promo={false} />
+      {promoCardData?.map((item, index) => {
+        return (
+          <PromoCardItem
+            key={index}
+            title={item.title}
+            image={item.image}
+            promo={item.promo}
+          />
+        );
+      })}
     </View>
   );
 };

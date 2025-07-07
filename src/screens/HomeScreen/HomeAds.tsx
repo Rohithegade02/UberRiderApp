@@ -1,48 +1,26 @@
 import { View, Text, Image } from 'react-native';
-import React, { memo, useMemo } from 'react';
-import { HomeScreenText } from './constants';
+import React, { memo } from 'react';
 import { styles } from './styles';
-import { IMAGE } from '../../constants/image';
 import { CustomButton } from '../../components/CustomButton';
 import { FlashList } from '@shopify/flash-list';
-import { HomeAdsProps } from './types';
-import { CustomLoader } from '../../components/CustomLoader';
-import { Rect } from 'react-content-loader/native';
+import { HomeAdsItemProps, HomeAdsProps } from './types';
 
-export const HomeAds = ({ loading }: HomeAdsProps) => {
-  const data = useMemo(
-    () => [
-      {
-        id: 1,
-        homeAdsTitle: HomeScreenText.homeCarAdsTitle,
-        homeAdsImage: IMAGE.carImage,
-        homeAdsButton: HomeScreenText.homeCarAdsButton,
-      },
-      {
-        id: 2,
-        homeAdsTitle: HomeScreenText.homeAutoAdsTitle,
-        homeAdsImage: IMAGE.autoImage,
-        homeAdsButton: HomeScreenText.homeAutoAdsButton,
-      },
-    ],
-    [],
-  );
-
-  if (loading) {
-    return (
-      <CustomLoader>
-        <Rect x="0" y="0" rx="12" ry="12" width="95%" height="120" />
-      </CustomLoader>
-    );
+// Home Ads Component
+export const HomeAds = ({ homeAdsData }: HomeAdsItemProps) => {
+  if (!homeAdsData) {
+    return null;
   }
+
+  const itemSeparator = () => <View style={styles.itemSeparator} />;
+
   return (
     <View style={styles.homeAdsContentContainer}>
       <FlashList
-        data={data}
+        data={homeAdsData}
         renderItem={({ item }) => <HomeAdsItem item={item} />}
         horizontal
         showsHorizontalScrollIndicator={false}
-        ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+        ItemSeparatorComponent={itemSeparator}
         keyExtractor={(_, index) => index.toString()}
         removeClippedSubviews
         estimatedItemSize={200}
@@ -59,6 +37,7 @@ export const HomeAds = ({ loading }: HomeAdsProps) => {
   );
 };
 
+// Home Ads Item Component
 const HomeAdsItem = memo(({ item }: { item: HomeAdsProps }) => {
   return (
     <View style={[styles.homeAdsItemContainer, item.homeAdsStyle]}>
@@ -67,7 +46,7 @@ const HomeAdsItem = memo(({ item }: { item: HomeAdsProps }) => {
           {item.homeAdsTitle}
         </Text>
         <CustomButton
-          buttonText={item.homeAdsButton}
+          buttonText={item.homeAdsButton!}
           buttonStyle={styles.homeAdsButton}
           buttonTextStyle={styles.homeAdsButtonText}
           onPress={() => {}}

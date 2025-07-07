@@ -16,6 +16,8 @@ const HomeScreen = ({
   searchHistory,
   handleWhereTo,
   handleSeeAll,
+  promoCardData,
+  homeAdsData,
 }: HomeScreenProps) => {
   return (
     <View style={styles.container}>
@@ -25,8 +27,11 @@ const HomeScreen = ({
         <WhereToInput handleWhereTo={handleWhereTo} />
         {/* Search History */}
         <SearchHistory searchHistory={searchHistory} />
-        <Suggestions handleSeeAll={handleSeeAll} />
-        <HomeAds />
+        <Suggestions
+          handleSeeAll={handleSeeAll}
+          promoCardData={promoCardData}
+        />
+        <HomeAds homeAdsData={homeAdsData!} />
       </View>
     </View>
   );
@@ -36,7 +41,6 @@ const HomeScreen = ({
 const WhereToInput = memo(({ handleWhereTo }: HomeScreenProps) => {
   return (
     <TouchableOpacity style={styles.whereToContainer} onPress={handleWhereTo}>
-      {/* TODO:icon not working */}
       <CustomIcon
         name="search"
         size={24}
@@ -47,6 +51,7 @@ const WhereToInput = memo(({ handleWhereTo }: HomeScreenProps) => {
         {HomeScreenText.whereToInputPlaceholder}
       </Text>
       <View style={styles.line} />
+
       {/* Calendar */}
       <View style={styles.calendarContainer}>
         <CustomIcon
@@ -82,20 +87,21 @@ const SearchHistory = memo(({ searchHistory }: SearchHistoryProps) => {
 });
 
 // Suggestions
-const Suggestions = memo(({ handleSeeAll }: SearchHistoryProps) => {
-  return (
-    <View style={styles.suggestionsContainer}>
-      <CustomHeader
-        leftText={HomeScreenText.suggestions}
-        rightText={HomeScreenText.seeAll}
-        // navigate to vehicle suggestions screen
-        leftPress={() => {}}
-        rightPress={handleSeeAll}
-        leftTextStyle={styles.leftTextStyle}
-        rightTextStyle={styles.rightTextStyle}
-      />
-      <PromoCard />
-    </View>
-  );
-});
+const Suggestions = memo(
+  ({ handleSeeAll, promoCardData }: SearchHistoryProps) => {
+    return (
+      <View style={styles.suggestionsContainer}>
+        <CustomHeader
+          leftText={HomeScreenText.suggestions}
+          rightText={HomeScreenText.seeAll}
+          leftPress={() => {}}
+          rightPress={handleSeeAll}
+          leftTextStyle={styles.leftTextStyle}
+          rightTextStyle={styles.rightTextStyle}
+        />
+        <PromoCard promoCardData={promoCardData!} />
+      </View>
+    );
+  },
+);
 export default HomeScreen;

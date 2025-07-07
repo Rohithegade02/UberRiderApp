@@ -8,4 +8,5 @@ export interface ServicePromoCardProps {
 
 export interface ServiceScreenProps {
   handleVehicleType: (vehicleType: string) => void;
+  servicePromoCardData: ServicePromoCardProps[];
 }

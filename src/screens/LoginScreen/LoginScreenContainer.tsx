@@ -14,8 +14,6 @@ export const LoginScreenContainer = memo(() => {
   const [countryCode, setCountryCode] = useState<string>('91');
   const [countryName, setCountryName] = useState<string>('IN');
 
-  console.log('countryCode', countryCode);
-
   const handleContinue = useCallback(async () => {
     // Validate phone number
     if (!phoneNumber) {
@@ -35,7 +33,6 @@ export const LoginScreenContainer = memo(() => {
         phoneNumber,
         countryCode ?? '91',
       );
-      console.log('formattedPhone', formattedPhone);
       // Send OTP using Firebase
       await sendOTP(formattedPhone);
 

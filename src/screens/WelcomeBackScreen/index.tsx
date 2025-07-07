@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import WelcomeBackLoader from './WelcomeBackLoader';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+//Lazy Load Welcome Back Screen
 const WelcomeBackScreenContainer = lazy(() =>
   import('./WelcomeBackContainer').then(m => ({
     default: m.WelcomeBackContainer,

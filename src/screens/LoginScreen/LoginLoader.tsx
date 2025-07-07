@@ -5,6 +5,7 @@ import { Rect } from 'react-content-loader/native';
 import { Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// Login Loader Component
 const HomeLoader = () => {
   const { height } = Dimensions.get('window');
   return (

@@ -10,8 +10,7 @@ export const LoginSocialButton = memo(
     handleGoogleLogin,
     handleAppleLogin,
     handleEmailLogin,
-  }: // loading,
-  LoginSocialButtonProps) => {
+  }: LoginSocialButtonProps) => {
     const buttons = useMemo(
       () => [
         {

@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native';
 
+// Account Presentational Screen
 export const AccountScreen = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>AccountScreen</Text>
-    </View>
+    </SafeAreaView>
   );
 };

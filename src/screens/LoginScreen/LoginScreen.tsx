@@ -1,16 +1,15 @@
 import React, { memo } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import { LoginScreenText } from './constants';
 import { styles } from './styles';
-import { CustomInput } from '../../components/CustomInput';
 import { LoginScreenProps } from './types';
 import { CustomButton } from '../../components/CustomButton';
 import { CustomItemSeparator } from '../../components/ItemSeparator';
 import { LoginSocialButton } from './LoginSocialButton';
 import { CustomIcon } from '../../components/CustomIcon';
 import { Colors } from '../../constants';
-import CountryPicker from 'react-native-country-picker-modal';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { CountryPhoneInput } from './LoginCountryPhoneInput';
 
 // Login Screen Presentational Component
 const LoginScreen = ({
@@ -29,35 +28,16 @@ const LoginScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{LoginScreenText.title}</Text>
-      {/* Mobile Number Input */}
 
-      <View style={styles.countryPickerContainer}>
-        <CountryPicker
-          countryCode={countryName || 'IN'}
-          withFilter
-          withFlag
-          // withCountryNameButton
-          withAlphaFilter
-          withCallingCode
-          withCallingCodeButton
-          withCallingCodePrefix
-          onSelect={country => {
-            setCountryName(country.cca2 || 'IN');
-            setCountryCode(country.callingCode?.[0] || '91');
-          }}
-          containerButtonStyle={styles.countryPickerButton}
-          countryButtonStyle={styles.countryButton}
-        />
-        <CustomInput
-          textInputLabel={LoginScreenText.title}
-          textInputPlaceholder={LoginScreenText.title}
-          textInputValue={phoneNumber}
-          textInputOnChangeText={setPhoneNumber}
-          textInputKeyboardType="phone-pad"
-          textInputStyle={styles.input}
-          textInputMaxLength={10}
-        />
-      </View>
+      {/* Mobile Number Input */}
+      <CountryPhoneInput
+        countryName={countryName}
+        setCountryName={setCountryName}
+        phoneNumber={phoneNumber}
+        setPhoneNumber={setPhoneNumber}
+        setCountryCode={setCountryCode}
+      />
+
       {/* Continue Button */}
       <CustomButton
         buttonText={LoginScreenText.continue}
@@ -80,7 +60,6 @@ const LoginScreen = ({
         handleGoogleLogin={handleGoogleLogin}
         handleAppleLogin={handleAppleLogin}
         handleEmailLogin={handleEmailLogin}
-        loading={loading}
       />
       {/* OR Separator */}
       <CustomItemSeparator

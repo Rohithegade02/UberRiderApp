@@ -4,6 +4,7 @@ import { Rect } from 'react-content-loader/native';
 import { View } from 'react-native';
 import { styles } from './styles';
 
+// Service Screen Loader
 export default function ServiceLoader() {
   return (
     <View style={styles.loaderContainer}>

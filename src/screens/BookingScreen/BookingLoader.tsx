@@ -4,6 +4,7 @@ import { CustomLoader } from '../../components/CustomLoader';
 import { Rect } from 'react-content-loader/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// Booking Screen Loader
 const BookingLoader = () => {
   return (
     <SafeAreaView style={styles.loaderContainer}>

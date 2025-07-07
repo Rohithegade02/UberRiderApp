@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import WelcomeBackScreen from './WelcomeBackScreen';
 import { sendOTP, verifyOTP } from '../../services';
 import { Alert } from 'react-native';
 import { WelcomeBackScreenParams } from './types';
 import { useAsyncStorage } from '../../hooks/useAsyncStorage';
+import { WelcomeBackScreenText } from './constants';
 
 // Welcome Back Screen Container Component
 
@@ -18,7 +19,7 @@ export const WelcomeBackContainer = memo(
     const [loading, setLoading] = useState(false);
     const [resendLoading, setResendLoading] = useState(false);
 
-    const name = 'Rohit';
+    const name = WelcomeBackScreenText.rohit;
     const number = phoneNumber;
 
     // Timer for resend functionality
@@ -34,7 +35,7 @@ export const WelcomeBackContainer = memo(
       return () => clearInterval(interval as any);
     }, [timer]);
 
-    const handleVerifyOTP = async () => {
+    const handleVerifyOTP = useCallback(async () => {
       if (!otpValue || otpValue.length !== 6) {
         Alert.alert('Error', 'Please enter a valid 6-digit OTP');
         return;
@@ -52,9 +53,9 @@ export const WelcomeBackContainer = memo(
       } finally {
         setLoading(false);
       }
-    };
+    }, [otpValue, setItem]);
 
-    const handleResendOTP = async () => {
+    const handleResendOTP = useCallback(async () => {
       setResendLoading(true);
 
       try {
@@ -73,7 +74,7 @@ export const WelcomeBackContainer = memo(
       } finally {
         setResendLoading(false);
       }
-    };
+    }, [number]);
 
     return (
       <WelcomeBackScreen

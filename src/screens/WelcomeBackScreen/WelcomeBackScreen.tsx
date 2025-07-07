@@ -38,11 +38,11 @@ const WelcomeBackScreen = ({
       />
       {/* Resend Button */}
       <CustomButton
-        buttonText={WelcomeBackScreenText.resendCode}
+        buttonText={WelcomeBackScreenText.resendCode + ' ' + '(' + timer + ')'}
         buttonStyle={styles.resendButton}
         buttonTextStyle={styles.resendButtonText}
         onPress={handleResendCode}
-        disabled={!canResend}
+        disabled={timer > 0}
         disabledContainerStyle={styles.disabledContainerStyle}
       />
       {/* Item Separator */}

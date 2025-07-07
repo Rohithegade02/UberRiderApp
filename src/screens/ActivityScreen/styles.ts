@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../constants';
 import { BoldFont18 } from '../../constants';
 
+// Activity Screen Styles
 export const styles = StyleSheet.create({
   container: {
     flex: 1,

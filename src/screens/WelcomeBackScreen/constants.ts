@@ -6,4 +6,5 @@ export const WelcomeBackScreenText = {
   changedPhoneNumber: 'Changed your Phone Number?',
   resendCode: 'Resend code',
   nextButton: 'Next',
+  rohit: 'Rohit',
 } as const;

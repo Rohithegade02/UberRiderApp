@@ -131,6 +131,7 @@ export const BookingScreen = ({
           )}
       </MapView>
 
+      {/* Confirmation Sheet */}
       {rideState === RideState.CONFIRMING_PICKUP ? (
         <ConfirmationSheet
           handleBackPress={handleBackPress}
@@ -157,6 +158,7 @@ export const BookingScreen = ({
           distanceInfo={distanceInfo}
         />
       )}
+      {/* Ride Completed Modal */}
       <RideCompletedModal
         visible={isRideCompletedModalVisible}
         onDismiss={handleRideCompletedModalDismiss}

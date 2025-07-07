@@ -10,4 +10,6 @@ export const HomeScreenText = {
   homeAutoAdsTitle: 'Enjoy 15% off on select rides',
   homeCarAdsButton: 'Try Now',
   homeAutoAdsButton: 'Try Auto',
+  ride: 'Ride',
+  auto: 'Auto',
 } as const;

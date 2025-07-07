@@ -3,6 +3,7 @@ import Navigation from './src/navigation/Navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import useLocationPermission from './src/hooks/useLocationPermission';
+import { StatusBar } from 'react-native';
 const App = () => {
   //check the location permission
   const { permissionStatus, requestLocationPermission } =
@@ -17,6 +18,11 @@ const App = () => {
   }
   return (
     <GestureHandlerRootView style={styles.container}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
       <Navigation />
     </GestureHandlerRootView>
   );
