@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   resendButtonText: {
     ...SemiBoldFont16,
-    color: Colors.black,
+    color: 'rgba(0,0,0,0.5)',
     alignSelf: 'center',
   },
   itemSeparator: {
@@ -63,6 +63,7 @@ export const styles = StyleSheet.create({
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',
+    padding: 20,
     alignItems: 'center',
   },
 });

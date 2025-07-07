@@ -9,4 +9,7 @@ export const BookingScreenText = {
   choose: 'Choose',
   confirmPickup: 'Confirm Pickup',
   pickupNow: 'Pickup Now',
+  pay: 'Pay',
+  rideCompleted: 'Ride completed',
+  rideCompletedSubtitle: 'Please proceed to pay the fare and exit the vehicle.',
 };

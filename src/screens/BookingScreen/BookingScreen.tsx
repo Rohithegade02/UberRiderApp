@@ -35,6 +35,7 @@ export const BookingScreen = ({
   routeProgressIndex,
   isRideCompletedModalVisible,
   handleRideCompletedModalDismiss,
+  handlePayAndSaveRide,
 }: BookingScreenProps) => {
   // Center the map on the user's current location
   const mapRegion = currentLocationCords
@@ -160,8 +161,9 @@ export const BookingScreen = ({
       )}
       {/* Ride Completed Modal */}
       <RideCompletedModal
-        visible={isRideCompletedModalVisible}
-        onDismiss={handleRideCompletedModalDismiss}
+        visible={isRideCompletedModalVisible!}
+        onDismiss={handleRideCompletedModalDismiss!}
+        handlePayAndSaveRide={handlePayAndSaveRide}
       />
     </View>
   );

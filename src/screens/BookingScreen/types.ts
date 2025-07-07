@@ -78,6 +78,7 @@ export interface BookingScreenProps {
   onConfirmRide?: () => void | undefined;
   isRideCompletedModalVisible?: boolean;
   handleRideCompletedModalDismiss?: () => void;
+  handlePayAndSaveRide?: () => void | undefined;
 }
 
 //Rider Input Props
@@ -129,4 +130,10 @@ export interface ConfirmationSheetProps {
   handleBackPress: () => void;
   onConfirm?: () => void;
   pickupAddress?: string;
+}
+
+export interface RideCompletedModalProps {
+  visible: boolean;
+  onDismiss: () => void;
+  handlePayAndSaveRide?: () => void | undefined;
 }

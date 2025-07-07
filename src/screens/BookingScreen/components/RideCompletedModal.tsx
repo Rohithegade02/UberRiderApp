@@ -1,19 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal } from 'react-native';
-import { BoldFont16, BoldFont20, Colors } from '../../../constants';
+import { View, Text, Modal } from 'react-native';
 import { CustomButton } from '../../../components/CustomButton';
-
-interface RideCompletedModalProps {
-  visible: boolean;
-  onDismiss: () => void;
-}
+import { BookingScreenText } from '../constants';
+import { RideCompletedModalProps } from '../types';
+import { styles } from '../styles';
 
 const RideCompletedModal = ({
   visible,
   onDismiss,
+  handlePayAndSaveRide,
 }: RideCompletedModalProps) => {
-  console.log('visible', onDismiss);
-
   return (
     <Modal
       visible={visible}
@@ -24,13 +20,15 @@ const RideCompletedModal = ({
     >
       <View style={styles.modalWrapper}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Ride completed</Text>
+          <Text style={styles.modalTitle}>
+            {BookingScreenText.rideCompleted}
+          </Text>
           <Text style={styles.modalSubtitle}>
-            Please proceed to pay the fare and exit the vehicle.
+            {BookingScreenText.rideCompletedSubtitle}
           </Text>
           <CustomButton
-            onPress={onDismiss}
-            buttonText="Pay"
+            onPress={handlePayAndSaveRide}
+            buttonText={BookingScreenText.pay}
             buttonStyle={styles.modalButton}
             buttonTextStyle={styles.modalButtonText}
           />
@@ -41,34 +39,3 @@ const RideCompletedModal = ({
 };
 
 export default RideCompletedModal;
-
-const styles = StyleSheet.create({
-  modalWrapper: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  modalContent: {
-    backgroundColor: Colors.lightBlack,
-    padding: 24,
-    borderRadius: 12,
-    width: '80%',
-  },
-  modalTitle: {
-    ...BoldFont20,
-    color: Colors.textwhite,
-  },
-  modalSubtitle: {
-    ...BoldFont16,
-    color: Colors.textwhite,
-  },
-  modalButton: {
-    marginTop: 16,
-  },
-  modalButtonText: {
-    ...BoldFont16,
-    color: Colors.textwhite,
-  },
-});

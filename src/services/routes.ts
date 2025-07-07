@@ -83,3 +83,22 @@ export const fetchDistanceMatrix = async (
     throw error;
   }
 };
+
+export async function getPlaceDetailsFromLatLng(
+  latitude: number,
+  longitude: number,
+): Promise<string> {
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.GOOGLE_MAPS_API_KEY}`,
+    );
+    const results = (await response.json()).results;
+    if (results && results.length > 0) {
+      return results[0].formatted_address;
+    }
+    return 'Unknown location';
+  } catch (error) {
+    console.error('Error fetching place details:', error);
+    return 'Unknown location';
+  }
+}

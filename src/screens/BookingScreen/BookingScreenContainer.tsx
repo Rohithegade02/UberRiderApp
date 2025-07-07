@@ -23,6 +23,7 @@ import {
   useRouteDetailsStore,
 } from '../../store';
 import { STACK_ROUTES, TAB_ROUTES } from '../../routes';
+import { saveRideDetails } from '../../services/firebaseFirestore';
 
 // Booking Screen Container Component
 export const BookingScreenContainer = () => {
@@ -326,6 +327,7 @@ export const BookingScreenContainer = () => {
     setVehicleLocationCords,
   ]);
 
+  // Handle confirm ride
   const handleConfirmRide = () => {
     setRideState(RideState.RIDE_STARTED);
     console.log('handleConfirmRide');
@@ -345,6 +347,23 @@ export const BookingScreenContainer = () => {
       err => console.log(err),
       { enableHighAccuracy: true, distanceFilter: 5, interval: 3000 },
     );
+  };
+
+  // Handle pay and save ride
+  const handlePayAndSaveRide = async () => {
+    const rideDetails = {
+      pickup: pickupLocationCords,
+      drop: destinationLocationCords,
+      vehicleType,
+      fare: distanceInfo?.fare ?? null,
+      timestamp: new Date(),
+    };
+    const cleanRideDetails = Object.fromEntries(
+      Object.entries(rideDetails).filter(([_, v]) => v !== undefined),
+    );
+    await saveRideDetails(cleanRideDetails);
+    // Optionally, dismiss modal or navigate
+    setIsRideCompletedModalVisible(false);
   };
 
   // Cleanup on unmount
@@ -384,6 +403,7 @@ export const BookingScreenContainer = () => {
       onConfirmRide={handleConfirmRide}
       isRideCompletedModalVisible={isRideCompletedModalVisible}
       handleRideCompletedModalDismiss={handleRideCompletedModalDismiss}
+      handlePayAndSaveRide={handlePayAndSaveRide}
     />
   );
 };

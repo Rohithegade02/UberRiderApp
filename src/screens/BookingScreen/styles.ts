@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import {
   BoldFont16,
   BoldFont18,
+  BoldFont20,
   Colors,
   RegularFont12,
   RegularFont14,
@@ -211,5 +212,33 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.lightBlack,
     padding: 20,
+  },
+  modalWrapper: {
+    flex: 1,
+    backgroundColor: Colors.black,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  modalContent: {
+    backgroundColor: Colors.lightBlack,
+    padding: 24,
+    borderRadius: 12,
+    width: '80%',
+  },
+  modalTitle: {
+    ...BoldFont20,
+    color: Colors.textwhite,
+  },
+  modalSubtitle: {
+    ...BoldFont16,
+    color: Colors.textwhite,
+  },
+  modalButton: {
+    marginTop: 16,
+  },
+  modalButtonText: {
+    ...BoldFont16,
+    color: Colors.textwhite,
   },
 });

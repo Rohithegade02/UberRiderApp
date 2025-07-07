@@ -1,13 +1,13 @@
-import { View } from 'react-native';
 import React from 'react';
 import { styles } from './styles';
 import { CustomLoader } from '../../components/CustomLoader';
 import { Rect } from 'react-content-loader/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Activity Screen Loader
 const ActivityLoader = () => {
   return (
-    <View style={styles.loaderContainer}>
+    <SafeAreaView style={styles.loaderContainer}>
       <CustomLoader height={110 * 10}>
         {[...Array(10)].map((_, i) => (
           <Rect
@@ -21,7 +21,7 @@ const ActivityLoader = () => {
           />
         ))}
       </CustomLoader>
-    </View>
+    </SafeAreaView>
   );
 };
 
