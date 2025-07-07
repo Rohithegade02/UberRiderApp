@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityScreen } from './ActivityScreen';
 import { getAllRides } from '../../services/firebaseFirestore';
-import { getPlaceDetailsFromLatLng } from '../../services/routes';
+import { fetchGeocode } from '../../services/routes';
 
 // Activity Container Screen
 export const ActivityScreenContainer = () => {
@@ -23,13 +23,14 @@ export const ActivityScreenContainer = () => {
               ride.pickup?.latitude &&
               ride.pickup?.longitude
             ) {
-              pickupAddress = await getPlaceDetailsFromLatLng(
+              pickupAddress = await fetchGeocode(
                 ride.pickup.latitude,
                 ride.pickup.longitude,
               );
+              console.log(pickupAddress.results[0].formatted_address);
             }
             if (!dropAddress && ride.drop?.latitude && ride.drop?.longitude) {
-              dropAddress = await getPlaceDetailsFromLatLng(
+              dropAddress = await fetchGeocode(
                 ride.drop.latitude,
                 ride.drop.longitude,
               );
@@ -37,8 +38,16 @@ export const ActivityScreenContainer = () => {
             console.log(pickupAddress, dropAddress);
             return {
               ...ride,
-              pickup: { ...ride.pickup, address: pickupAddress.split(',')[1] },
-              drop: { ...ride.drop, address: dropAddress.split(',')[1] },
+              pickup: {
+                ...ride.pickup,
+                address:
+                  pickupAddress?.results[0].formatted_address.split(',')[1],
+              },
+              drop: {
+                ...ride.drop,
+                address:
+                  dropAddress?.results[0].formatted_address.split(',')[1],
+              },
             };
           }),
         );

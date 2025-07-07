@@ -70,12 +70,18 @@ export const BookingScreenContainer = () => {
   const [isRideCompletedModalVisible, setIsRideCompletedModalVisible] =
     useState(false);
 
+  // Simulated ride movement
+  const simulationIndexRef = useRef(0);
+  const simulationIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Ride completed modal visibility
   useEffect(() => {
     if (rideState === RideState.RIDE_COMPLETED) {
       setIsRideCompletedModalVisible(true);
     }
   }, [rideState]);
 
+  // Ride completed modal dismiss
   const handleRideCompletedModalDismiss = () => {
     setIsRideCompletedModalVisible(false);
     navigate(STACK_ROUTES.TabNavigator, { screen: TAB_ROUTES.Activity });
@@ -272,10 +278,6 @@ export const BookingScreenContainer = () => {
       longitudeDelta: 0.005,
     }),
   ).current;
-
-  // --- Simulated movement helpers ---
-  const simulationIndexRef = useRef(0);
-  const simulationIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const stopSimulatedRide = useCallback(() => {
     if (simulationIntervalRef.current) {
