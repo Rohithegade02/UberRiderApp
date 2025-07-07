@@ -27,7 +27,7 @@ export interface DistanceInfo {
 }
 
 // Booking Screen Props
-export interface BookingScreenProps {
+export interface BookingScreenProps extends MapViewComponentProps {
   currentLocation?: string;
   destinationLocation?: string;
   setCurrentLocation: (location: string) => void;
@@ -46,7 +46,7 @@ export interface BookingScreenProps {
   pickupLocationCords?: {
     latitude: number;
     longitude: number;
-    address: string;
+    address?: string;
   } | null;
   vehicleLocationCords?: {
     latitude: number;
@@ -78,7 +78,8 @@ export interface BookingScreenProps {
   onConfirmRide?: () => void | undefined;
   isRideCompletedModalVisible?: boolean;
   handleRideCompletedModalDismiss?: () => void;
-  handlePayAndSaveRide?: () => void | undefined;
+  handlePayAndSaveRide?: () => Promise<void>;
+  mapRegion?: any;
 }
 
 //Rider Input Props
@@ -135,5 +136,54 @@ export interface ConfirmationSheetProps {
 export interface RideCompletedModalProps {
   visible: boolean;
   onDismiss: () => void;
-  handlePayAndSaveRide?: () => void | undefined;
+  handlePayAndSaveRide?: () => Promise<void>;
+}
+export interface MapViewComponentProps {
+  mapRegion?: any;
+  routeCoordinates?: any;
+  currentLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
+  destinationLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
+  pickupLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
+  vehicleLocationCords?: {
+    latitude: number;
+    longitude: number;
+  } | null;
+
+  // New props for custom autocomplete
+  rideState: RideState;
+  // Callback when user sets pickup location by moving the pin
+  onPickupLocationSet?: (coords: {
+    latitude: number;
+    longitude: number;
+  }) => void;
+  // Address string for the currently selected pickup location
+  pickupAddress?: string;
+  // index of the last reached point on route for trimming polyline
+  routeProgressIndex?: number;
+  onConfirmRide?: () => void;
+}
+
+export interface RiderInputProps {
+  currentLocation: string;
+  setCurrentLocation: (location: string) => void;
+  setDestinationLocation: (
+    data: GooglePlaceData,
+    details: GooglePlaceDetail | null,
+  ) => void;
+  googleApiKey: string;
+
+  // New props for custom autocomplete
+  destinationInput: string;
+  handleDestinationInputChange: (text: string) => void;
+  predictions: GooglePlaceData[];
+  handlePredictionPress: (place: GooglePlaceData) => void;
 }

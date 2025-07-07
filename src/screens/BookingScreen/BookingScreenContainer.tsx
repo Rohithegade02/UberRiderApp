@@ -357,7 +357,7 @@ export const BookingScreenContainer = () => {
       pickup: pickupLocationCords,
       drop: destinationLocationCords,
       vehicleType,
-      fare: distanceInfo?.fare ?? null,
+      fare: (distanceInfo as any)?.fare ?? null,
       timestamp: new Date(),
     };
     const cleanRideDetails = Object.fromEntries(
@@ -366,6 +366,7 @@ export const BookingScreenContainer = () => {
     await saveRideDetails(cleanRideDetails);
     // Optionally, dismiss modal or navigate
     setIsRideCompletedModalVisible(false);
+    setRideState(RideState.RIDE_COMPLETED);
   };
 
   // Cleanup on unmount
