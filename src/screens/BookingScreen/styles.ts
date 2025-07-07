@@ -215,7 +215,7 @@ export const styles = StyleSheet.create({
   },
   modalWrapper: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,

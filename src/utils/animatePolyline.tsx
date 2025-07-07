@@ -31,7 +31,7 @@ export const AnimatingPolylineComponent = ({
         });
       }, 70);
     }
-
+    //unmount the interval
     return () => {
       if (interval) {
         clearInterval(interval);

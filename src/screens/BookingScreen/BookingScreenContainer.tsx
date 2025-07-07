@@ -364,9 +364,12 @@ export const BookingScreenContainer = () => {
       Object.entries(rideDetails).filter(([_, v]) => v !== undefined),
     );
     await saveRideDetails(cleanRideDetails);
-    // Optionally, dismiss modal or navigate
     setIsRideCompletedModalVisible(false);
     setRideState(RideState.RIDE_COMPLETED);
+    navigate(STACK_ROUTES.TabNavigator, { screen: TAB_ROUTES.Activity });
+    // setDestinationInput('');
+    // setDestinationLocation('');
+    // setDestinationLocationCords({ latitude: 0, longitude: 0 });
   };
 
   // Cleanup on unmount

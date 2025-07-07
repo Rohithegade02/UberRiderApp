@@ -3,8 +3,8 @@ import LoginScreen from './LoginScreen';
 import { navigate } from '../../navigation/NavigationUtil';
 import { STACK_ROUTES } from '../../routes';
 import { Alert } from 'react-native';
-import { formatPhoneNumber, sendOTP } from '../../services';
 import { validatePhoneNumber } from '../../utils/validatePhoneNumber';
+import { formatPhoneNumber } from '../../utils/formatPhoneNumber';
 
 // Login Screen Container Component
 export const LoginScreenContainer = memo(() => {

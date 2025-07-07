@@ -80,7 +80,7 @@ const RideSheet = ({
       handleIndicatorStyle={styles.handleIndicatorStyle}
     >
       <BottomSheetView style={styles.bottomSheetContentContainer}>
-        {currentLocationCords && destinationLocationCords ? (
+        {rideState === RideState.SELECTING_VEHICLE ? (
           <VehicleSelectionSheet
             handleBackPress={handleBackPress}
             vehicleType={vehicleType!}
