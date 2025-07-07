@@ -182,4 +182,9 @@ export const styles = StyleSheet.create({
   homeAdsContentContainer: {
     marginVertical: 16,
   },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: Colors.lightBlack,
+    padding: 20,
+  },
 });

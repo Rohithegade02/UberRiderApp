@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   BoldFont18,
   Colors,
@@ -7,6 +7,7 @@ import {
   SemiBoldFont22,
 } from '../../constants';
 
+const width = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     paddingHorizontal: 16,
     borderColor: Colors.grayBackground,
+    width: width * 0.63,
   },
   continueButton: {
     backgroundColor: Colors.black,
@@ -59,7 +61,6 @@ export const styles = StyleSheet.create({
   socialButtonText: {
     ...BoldFont18,
     color: Colors.black,
-    fontWeight: 'bold',
     alignSelf: 'center',
   },
   findMyAccountButton: {
@@ -77,7 +78,6 @@ export const styles = StyleSheet.create({
   findMyAccountButtonText: {
     ...BoldFont18,
     color: Colors.black,
-    fontWeight: 'bold',
     alignSelf: 'center',
   },
   footerText: {
@@ -87,5 +87,31 @@ export const styles = StyleSheet.create({
   },
   disabledContainerStyle: {
     opacity: 0.5,
+  },
+  countryPickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    padding: 20,
+  },
+  countryPickerButton: {
+    backgroundColor: Colors.grayBackground,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderColor: Colors.grayBackground,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  countryButton: {
+    ...BoldFont18,
+    color: Colors.black,
+    alignSelf: 'center',
   },
 });

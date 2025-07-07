@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { Colors, SemiBoldFont16, SemiBoldFont22 } from '../../constants';
+import {
+  Colors,
+  RegularFont14,
+  SemiBoldFont16,
+  SemiBoldFont22,
+} from '../../constants';
 
 // Welcome Back Screen Styles
 export const styles = StyleSheet.create({
@@ -11,7 +16,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     ...SemiBoldFont22,
-    fontWeight: 'bold',
   },
   changedPhoneNumber: {
     textDecorationLine: 'underline',
@@ -39,7 +43,6 @@ export const styles = StyleSheet.create({
   resendButtonText: {
     ...SemiBoldFont16,
     color: Colors.black,
-    fontWeight: 'bold',
     alignSelf: 'center',
   },
   itemSeparator: {
@@ -50,9 +53,16 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     width: '50%',
-    backgroundColor: Colors.textwhite,
-    opacity: 0.9,
+    backgroundColor: Colors.grayBackground,
     alignSelf: 'flex-end',
+  },
+  otpText: {
+    ...RegularFont14,
     color: Colors.black,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -12,4 +12,9 @@ export const styles = StyleSheet.create({
     color: Colors.textwhite,
     alignSelf: 'center',
   },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: Colors.lightBlack,
+    padding: 20,
+  },
 });

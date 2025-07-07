@@ -207,4 +207,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: Colors.lightBlack,
+    padding: 20,
+  },
 });

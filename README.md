@@ -66,3 +66,7 @@ These discrete states drive both UI rendering and backend requests, ensuring cle
 2. **Presentational components**
    • Presentational components are responsible for rendering the UI. They are also responsible for handling user interactions.
    • Presentational components are also responsible for handling navigation and routing.
+
+User Experience
+
+Optimizations

@@ -157,17 +157,8 @@ export const cancelVerification = (): void => {
  * @param {string} countryCode - Country code (e.g., '+91' for India)
  * @returns {string} - Formatted phone number
  */
-export const formatPhoneNumber = (
-  phoneNumber: string,
-  countryCode: string = '+91',
-): string => {
-  // Remove any non-digit characters
-  const cleanNumber = phoneNumber.replace(/\D/g, '');
-
-  // Add country code if not present
-  if (!phoneNumber.startsWith('+')) {
-    return `${countryCode}${cleanNumber}`;
-  }
-
-  return phoneNumber;
-};
+export function formatPhoneNumber(phoneNumber: string, countryCode: string) {
+  // Ensure countryCode starts with '+'
+  const prefix = countryCode.startsWith('+') ? countryCode : `+${countryCode}`;
+  return `${prefix}${phoneNumber}`;
+}

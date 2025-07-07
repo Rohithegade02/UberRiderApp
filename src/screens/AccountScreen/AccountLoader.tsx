@@ -1,10 +1,10 @@
+import { View } from 'react-native';
 import React from 'react';
+import { styles } from './styles';
 import { CustomLoader } from '../../components/CustomLoader';
 import { Rect } from 'react-content-loader/native';
-import { View } from 'react-native';
-import { styles } from './styles';
 
-export default function ServiceLoader() {
+const AccountLoader = () => {
   return (
     <View style={styles.loaderContainer}>
       <CustomLoader height={110 * 10}>
@@ -22,4 +22,6 @@ export default function ServiceLoader() {
       </CustomLoader>
     </View>
   );
-}
+};
+
+export default AccountLoader;

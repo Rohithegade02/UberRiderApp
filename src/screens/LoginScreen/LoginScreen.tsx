@@ -9,6 +9,8 @@ import { CustomItemSeparator } from '../../components/ItemSeparator';
 import { LoginSocialButton } from './LoginSocialButton';
 import { CustomIcon } from '../../components/CustomIcon';
 import { Colors } from '../../constants';
+import CountryPicker from 'react-native-country-picker-modal';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Login Screen Presentational Component
 const LoginScreen = ({
@@ -19,14 +21,33 @@ const LoginScreen = ({
   handleGoogleLogin,
   handleAppleLogin,
   handleEmailLogin,
+  // countryCode,
+  setCountryCode,
+  countryName,
+  setCountryName,
 }: LoginScreenProps) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{LoginScreenText.title}</Text>
       {/* Mobile Number Input */}
 
-      {/* //TODO: add phone number validation and add country flag dropdown */}
-      <View>
+      <View style={styles.countryPickerContainer}>
+        <CountryPicker
+          countryCode={countryName || 'IN'}
+          withFilter
+          withFlag
+          // withCountryNameButton
+          withAlphaFilter
+          withCallingCode
+          withCallingCodeButton
+          withCallingCodePrefix
+          onSelect={country => {
+            setCountryName(country.cca2 || 'IN');
+            setCountryCode(country.callingCode?.[0] || '91');
+          }}
+          containerButtonStyle={styles.countryPickerButton}
+          countryButtonStyle={styles.countryButton}
+        />
         <CustomInput
           textInputLabel={LoginScreenText.title}
           textInputPlaceholder={LoginScreenText.title}
@@ -73,14 +94,13 @@ const LoginScreen = ({
         buttonStyle={styles.findMyAccountButton}
         buttonTextStyle={styles.findMyAccountButtonText}
         onPress={handleContinue}
-        // loading={loading}
         icon={<CustomIcon name="search" iconFamily="Ionicons" size={24} />}
         iconPosition="left"
         iconColor="black"
       />
       {/* Footer Text */}
       <Text style={styles.footerText}>{LoginScreenText.footerText}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

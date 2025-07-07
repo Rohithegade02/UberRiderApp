@@ -1,8 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import WelcomeBackScreen from './WelcomeBackScreen';
-import { navigate } from '../../navigation/NavigationUtil';
-import { STACK_ROUTES, TAB_ROUTES } from '../../routes';
 import { sendOTP, verifyOTP } from '../../services';
 import { Alert } from 'react-native';
 import { WelcomeBackScreenParams } from './types';

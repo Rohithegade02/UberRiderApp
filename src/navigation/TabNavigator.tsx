@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreenContainer } from '../screens/HomeScreen';
-import { AccountScreenContainer } from '../screens/AccountScreen';
-import { ActivityScreenContainer } from '../screens/ActivityScreen';
+import HomePage from '../screens/HomeScreen';
+import AccountPage from '../screens/AccountScreen';
+import ActivityPage from '../screens/ActivityScreen';
 import { Colors } from '../constants';
 import { TAB_ROUTES } from '../routes';
 import { AccountIcon } from './TabIcon';
@@ -27,7 +27,7 @@ export const TabNavigatorContainer = () => (
   >
     <Tab.Screen
       name={TAB_ROUTES.Home}
-      component={HomeScreenContainer}
+      component={HomePage}
       options={{
         tabBarLabel: 'Home',
         tabBarIcon: HomeIcon,
@@ -47,7 +47,7 @@ export const TabNavigatorContainer = () => (
     />
     <Tab.Screen
       name={TAB_ROUTES.Activity}
-      component={ActivityScreenContainer}
+      component={ActivityPage}
       options={{
         tabBarLabel: 'Activity',
         tabBarIcon: ActivityIcon,
@@ -57,7 +57,7 @@ export const TabNavigatorContainer = () => (
     />
     <Tab.Screen
       name={TAB_ROUTES.Account}
-      component={AccountScreenContainer}
+      component={AccountPage}
       options={{
         tabBarLabel: 'Account',
         tabBarIcon: AccountIcon,

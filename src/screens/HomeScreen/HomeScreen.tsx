@@ -10,14 +10,11 @@ import { HomeScreenProps, SearchHistoryProps } from './types';
 import { CustomHeader } from '../../components/CustomHeader';
 import { PromoCard } from './PromoCard';
 import { HomeAds } from './HomeAds';
-import { CustomLoader } from '../../components/CustomLoader';
-import { Rect } from 'react-content-loader/native';
 
 // Home Screen Presentational Component
 const HomeScreen = ({
   searchHistory,
   handleWhereTo,
-  loading,
   handleSeeAll,
 }: HomeScreenProps) => {
   return (
@@ -25,25 +22,18 @@ const HomeScreen = ({
       <Image source={IMAGE.homeScreenLogo} style={styles.logoImage} />
       <View style={styles.mainContainer}>
         {/* Where To Input */}
-        <WhereToInput handleWhereTo={handleWhereTo} loading={loading} />
+        <WhereToInput handleWhereTo={handleWhereTo} />
         {/* Search History */}
-        <SearchHistory searchHistory={searchHistory} loading={loading} />
-        <Suggestions loading={loading} handleSeeAll={handleSeeAll} />
-        <HomeAds loading={loading} />
+        <SearchHistory searchHistory={searchHistory} />
+        <Suggestions handleSeeAll={handleSeeAll} />
+        <HomeAds />
       </View>
     </View>
   );
 };
 
 // Where To Input
-const WhereToInput = memo(({ handleWhereTo, loading }: HomeScreenProps) => {
-  if (loading) {
-    return (
-      <CustomLoader>
-        <Rect x="0" y="0" rx="36" ry="36" width="100%" height="60" />
-      </CustomLoader>
-    );
-  }
+const WhereToInput = memo(({ handleWhereTo }: HomeScreenProps) => {
   return (
     <TouchableOpacity style={styles.whereToContainer} onPress={handleWhereTo}>
       {/* TODO:icon not working */}
@@ -72,14 +62,7 @@ const WhereToInput = memo(({ handleWhereTo, loading }: HomeScreenProps) => {
 });
 
 // Search History
-const SearchHistory = memo(({ searchHistory, loading }: SearchHistoryProps) => {
-  if (loading) {
-    return (
-      <CustomLoader>
-        <Rect x="0" y="0" rx="12" ry="12" width="100%" height="80" />
-      </CustomLoader>
-    );
-  }
+const SearchHistory = memo(({ searchHistory }: SearchHistoryProps) => {
   return (
     <TouchableOpacity style={styles.searchHistoryContainer}>
       <View style={styles.iconContainer}>
@@ -99,17 +82,7 @@ const SearchHistory = memo(({ searchHistory, loading }: SearchHistoryProps) => {
 });
 
 // Suggestions
-const Suggestions = memo(({ loading, handleSeeAll }: SearchHistoryProps) => {
-  if (loading) {
-    return (
-      <CustomLoader>
-        <Rect x="0" y="0" rx="4" ry="4" width="50" height="10" />
-        <Rect x="280" y="0" rx="4" ry="4" width="70" height="10" />
-        <Rect x="0" y="20" rx="4" ry="4" width="45%" height="70" />
-        <Rect x="180" y="20" rx="4" ry="4" width="45%" height="70" />
-      </CustomLoader>
-    );
-  }
+const Suggestions = memo(({ handleSeeAll }: SearchHistoryProps) => {
   return (
     <View style={styles.suggestionsContainer}>
       <CustomHeader

@@ -76,6 +76,8 @@ export interface BookingScreenProps {
   // index of the last reached point on route for trimming polyline
   routeProgressIndex?: number;
   onConfirmRide?: () => void | undefined;
+  isRideCompletedModalVisible?: boolean;
+  handleRideCompletedModalDismiss?: () => void;
 }
 
 //Rider Input Props

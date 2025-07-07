@@ -68,6 +68,6 @@ export const styles = StyleSheet.create({
   loaderContainer: {
     flex: 1,
     backgroundColor: Colors.lightBlack,
-    padding: 12,
+    padding: 20,
   },
 });

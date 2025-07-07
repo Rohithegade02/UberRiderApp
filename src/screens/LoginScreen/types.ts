@@ -9,4 +9,8 @@ export interface LoginScreenProps extends LoginSocialButtonProps {
   setPhoneNumber: (phoneNumber: string) => void;
   handleContinue: () => void;
   loading: boolean;
+  countryCode: string;
+  setCountryCode: (countryCode: string) => void;
+  countryName: string;
+  setCountryName: (countryName: string) => void;
 }

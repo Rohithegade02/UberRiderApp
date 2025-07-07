@@ -18,7 +18,7 @@ const WelcomeBackOTP = memo(
   WelcomeBackOTPProps) => {
     return (
       <View style={styles.containerOTP}>
-        <Text>
+        <Text style={styles.otpText}>
           {WelcomeBackScreenText.otpText} {number}
         </Text>
         <Text style={styles.changedPhoneNumber}>

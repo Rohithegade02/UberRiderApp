@@ -10,6 +10,11 @@ import { validatePhoneNumber } from '../../utils/validatePhoneNumber';
 export const LoginScreenContainer = memo(() => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  //country code
+  const [countryCode, setCountryCode] = useState<string>('91');
+  const [countryName, setCountryName] = useState<string>('IN');
+
+  console.log('countryCode', countryCode);
 
   const handleContinue = useCallback(async () => {
     // Validate phone number
@@ -26,9 +31,11 @@ export const LoginScreenContainer = memo(() => {
     setLoading(true);
 
     try {
-      // Format phone number with country code (+91 for India)
-      const formattedPhone = formatPhoneNumber(phoneNumber, '+91');
-
+      const formattedPhone = formatPhoneNumber(
+        phoneNumber,
+        countryCode ?? '91',
+      );
+      console.log('formattedPhone', formattedPhone);
       // Send OTP using Firebase
       await sendOTP(formattedPhone);
 
@@ -39,7 +46,7 @@ export const LoginScreenContainer = memo(() => {
     } finally {
       setLoading(false);
     }
-  }, [phoneNumber]);
+  }, [phoneNumber, countryCode]);
 
   const handleGoogleLogin = useCallback(() => {
     // Implement Google login logic
@@ -65,6 +72,10 @@ export const LoginScreenContainer = memo(() => {
       handleGoogleLogin={handleGoogleLogin}
       handleAppleLogin={handleAppleLogin}
       handleEmailLogin={handleEmailLogin}
+      countryCode={countryCode}
+      setCountryCode={setCountryCode}
+      countryName={countryName}
+      setCountryName={setCountryName}
     />
   );
 });

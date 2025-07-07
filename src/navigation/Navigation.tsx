@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './NavigationUtil';
-import { LoginScreenContainer } from '../screens/LoginScreen';
+import LoginPage from '../screens/LoginScreen';
 import { STACK_ROUTES } from '../routes';
-import { WelcomeBackContainer } from '../screens/WelcomeBackScreen';
-import { BookingScreenContainer } from '../screens/BookingScreen';
+import BookingPage from '../screens/BookingScreen';
 import { TabNavigatorContainer } from './TabNavigator';
 import { useAsyncStorage } from '../hooks/useAsyncStorage';
 import { SplashScreen } from '../screens/SplashScreen';
+import WelcomeBackPage from '../screens/WelcomeBackScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
   }, []);
 
   // Listen for storage changes to update auth state
-  React.useEffect(() => {
+  useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
         const token = await getItem('token');
@@ -83,13 +83,10 @@ const Navigation: React.FC = () => {
           initialRouteName={STACK_ROUTES.LoginScreen}
           screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen
-            name={STACK_ROUTES.LoginScreen}
-            component={LoginScreenContainer}
-          />
+          <Stack.Screen name={STACK_ROUTES.LoginScreen} component={LoginPage} />
           <Stack.Screen
             name={STACK_ROUTES.WelcomeBackScreen}
-            component={WelcomeBackContainer}
+            component={WelcomeBackPage}
           />
         </Stack.Navigator>
       ) : (
@@ -103,7 +100,7 @@ const Navigation: React.FC = () => {
           />
           <Stack.Screen
             name={STACK_ROUTES.BookingScreen}
-            component={BookingScreenContainer}
+            component={BookingPage}
           />
         </Stack.Navigator>
       )}

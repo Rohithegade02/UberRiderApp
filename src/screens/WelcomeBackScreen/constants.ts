@@ -1,6 +1,6 @@
 // Welcome Back Screen Text
 export const WelcomeBackScreenText = {
-  title: 'Welcome Back',
+  title: 'Welcome',
   subtitle: 'Login to your account',
   otpText: 'Enter the 6-digit code sent via SMS at',
   changedPhoneNumber: 'Changed your Phone Number?',

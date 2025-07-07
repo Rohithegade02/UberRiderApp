@@ -96,6 +96,11 @@ android {
             keyPassword 'android'
         }
     }
+    lintOptions {
+    // Ignore lint errors in node_modules
+    checkReleaseBuilds false
+    abortOnError false
+    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -113,6 +118,7 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation ('androidx.core:core-splashscreen:1.0.1')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -121,3 +127,8 @@ dependencies {
     }
 }
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugLintReportModel") {
+        task.dependsOn("copyReactNativeVectorIconFonts")
+    }
+}

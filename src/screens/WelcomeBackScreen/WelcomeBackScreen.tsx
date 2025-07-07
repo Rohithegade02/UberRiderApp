@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import React, { memo } from 'react';
 import { WelcomeBackScreenProps } from './types';
 import { styles } from './styles';
@@ -19,10 +19,13 @@ const WelcomeBackScreen = ({
   loading,
   resendLoading,
 }: WelcomeBackScreenProps) => {
-  console.log('otpValue', otpValue.length !== 6);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>WelcomeBackScreen {name} .</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>
+        {WelcomeBackScreenText.title} {name} .
+      </Text>
+
+      {/* OTP Input */}
       <WelcomeBackOTP
         number={number}
         otpValue={otpValue}
@@ -33,6 +36,7 @@ const WelcomeBackScreen = ({
         loading={loading}
         resendLoading={resendLoading}
       />
+      {/* Resend Button */}
       <CustomButton
         buttonText={WelcomeBackScreenText.resendCode}
         buttonStyle={styles.resendButton}
@@ -43,6 +47,7 @@ const WelcomeBackScreen = ({
       />
       {/* Item Separator */}
       <View style={styles.itemSeparator} />
+      {/* Next Button */}
       <CustomButton
         buttonText={WelcomeBackScreenText.nextButton}
         buttonStyle={styles.nextButton}
@@ -51,7 +56,7 @@ const WelcomeBackScreen = ({
         disabled={otpValue.length !== 6}
         disabledContainerStyle={styles.disabledContainerStyle}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
