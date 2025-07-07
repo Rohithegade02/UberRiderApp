@@ -128,7 +128,7 @@ export const BookingScreenContainer = () => {
       console.error('Error fetching predictions:', err);
       setPredictions([]);
     }
-  }, 400);
+  }, 300);
 
   // Handle destination input change
   const handleDestinationInputChange = (text: string) => {
