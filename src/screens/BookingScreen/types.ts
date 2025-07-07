@@ -110,7 +110,6 @@ export interface VehicleSelectionSheetProps {
   handleBackPress: () => void;
   vehicleType: string;
   setVehicleType: (vehicleType: string) => void;
-  bottomSheetRef: React.RefObject<BottomSheetMethods>;
   rideState: RideState;
   setRideState: (rideState: RideState) => void;
   distanceInfo: DistanceInfo | null;

@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
   textInput: {
     ...RegularFont14,
     color: Colors.textInputLabel,
-    paddingHorizontal: 12,
-    paddingVertical: 14,
+    // paddingHorizontal: 12,
+    // paddingVertical: 14,
     borderRadius: 24,
     width: width * 0.9,
     borderWidth: 1,

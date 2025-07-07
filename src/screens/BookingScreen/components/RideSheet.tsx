@@ -6,7 +6,6 @@ import { Colors } from '../../../constants';
 import { CustomIcon } from '../../../components/CustomIcon';
 import { BookingScreenProps, RideState } from '../types';
 import { BookingScreenText } from '../constants';
-import { VehicleSelectionSheet } from './VehicleSelectionSheet';
 import { RidePlanSheet } from './RidePlanSheet';
 import { DestionationSelectionSheet } from './DestionationSelectionSheet';
 
@@ -30,8 +29,6 @@ const RideSheet = ({
 }: BookingScreenProps) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet | null>(null);
-
-  // Add this for position tracking
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -62,6 +59,7 @@ const RideSheet = ({
 
   // Hide sheet once ride starts or is completed
   if (
+    rideState === RideState.CONFIRMING_PICKUP ||
     rideState === RideState.RIDE_STARTED ||
     rideState === RideState.RIDE_COMPLETED
   ) {
@@ -80,58 +78,42 @@ const RideSheet = ({
       handleIndicatorStyle={styles.handleIndicatorStyle}
     >
       <BottomSheetView style={styles.bottomSheetContentContainer}>
-        {rideState === RideState.SELECTING_VEHICLE ? (
-          <VehicleSelectionSheet
+        {currentSnapIndex !== 0 && (
+          <View style={styles.bottomSheetHeaderContainer}>
+            <CustomIcon
+              name="arrow-back"
+              size={24}
+              color={Colors.textwhite}
+              iconFamily="Ionicons"
+              onPress={handleBackPress}
+            />
+            <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
+            <View />
+          </View>
+        )}
+        {currentSnapIndex === 1 && (
+          <View>
+            <DestionationSelectionSheet handlePinLocation={handlePinLocation} />
+          </View>
+        )}
+        {currentSnapIndex === 2 && (
+          <RidePlanSheet
+            currentLocation={currentLocation}
+            destinationLocation={destinationLocation}
+            setCurrentLocation={setCurrentLocation}
+            setDestinationLocation={setDestinationLocation}
             handleBackPress={handleBackPress}
-            vehicleType={vehicleType!}
+            destinationInput={destinationInput}
+            handleDestinationInputChange={handleDestinationInputChange}
+            predictions={predictions}
+            handlePredictionPress={handlePredictionPress}
             setVehicleType={setVehicleType}
+            vehicleType={vehicleType}
             bottomSheetRef={bottomSheetRef as any}
             rideState={rideState}
             setRideState={setRideState}
-            distanceInfo={distanceInfo as any}
+            distanceInfo={distanceInfo}
           />
-        ) : (
-          <>
-            {currentSnapIndex !== 0 && (
-              <View style={styles.bottomSheetHeaderContainer}>
-                <CustomIcon
-                  name="arrow-back"
-                  size={24}
-                  color={Colors.textwhite}
-                  iconFamily="Ionicons"
-                  onPress={handleBackPress}
-                />
-                <Text style={styles.bottomSheetTitle}>{getTitle()}</Text>
-                <View />
-              </View>
-            )}
-            {currentSnapIndex === 1 && (
-              <View>
-                <DestionationSelectionSheet
-                  handlePinLocation={handlePinLocation}
-                />
-              </View>
-            )}
-            {currentSnapIndex === 2 && (
-              <RidePlanSheet
-                currentLocation={currentLocation}
-                destinationLocation={destinationLocation}
-                setCurrentLocation={setCurrentLocation}
-                setDestinationLocation={setDestinationLocation}
-                handleBackPress={handleBackPress}
-                destinationInput={destinationInput}
-                handleDestinationInputChange={handleDestinationInputChange}
-                predictions={predictions}
-                handlePredictionPress={handlePredictionPress}
-                setVehicleType={setVehicleType}
-                vehicleType={vehicleType}
-                bottomSheetRef={bottomSheetRef as any}
-                rideState={rideState}
-                setRideState={setRideState}
-                distanceInfo={distanceInfo}
-              />
-            )}
-          </>
         )}
       </BottomSheetView>
     </BottomSheet>

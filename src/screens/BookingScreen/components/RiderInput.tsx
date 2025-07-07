@@ -22,15 +22,15 @@ const RiderInput = ({
           <View style={styles.lineContainer}>
             <CustomIcon
               name="circle-o"
-              size={24}
-              color={Colors.textwhite}
+              size={18}
+              color={Colors.textgray}
               iconFamily="FontAwesome"
             />
             <View style={styles.line} />
             <CustomIcon
               name="circle-o"
-              size={24}
-              color={Colors.textwhite}
+              size={18}
+              color={Colors.textgray}
               iconFamily="FontAwesome"
             />
           </View>
@@ -45,6 +45,7 @@ const RiderInput = ({
               placeholderTextStyle={Colors.textwhite as any}
               textInputMaxLength={100}
             />
+            <View style={styles.textLine} />
             <CustomInput
               textInputLabel="Where to?"
               textInputPlaceholder="Where to?"

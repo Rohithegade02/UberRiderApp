@@ -29,7 +29,7 @@ interface BookingStore {
 
 export const useBookingStore = create<BookingStore>(set => ({
   vehicleType: '',
-  rideState: RideState.IDLE,
+  rideState: RideState.SELECTING_DESTINATION,
   currentLocation: '',
   destinationLocation: '',
   pickupLocation: '',

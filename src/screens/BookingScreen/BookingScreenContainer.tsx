@@ -27,6 +27,7 @@ import { saveRideDetails } from '../../services/firebaseFirestore';
 
 // Booking Screen Container Component
 export const BookingScreenContainer = () => {
+  //#region STORE HOOKS
   const {
     currentLocation,
     setCurrentLocation,
@@ -59,7 +60,9 @@ export const BookingScreenContainer = () => {
     destinationInput,
     setDestinationInput,
   } = useRouteDetailsStore();
+  //#endregion
 
+  //#region LOCAL STATE
   // State for route progress index
   const [routeProgressIndex, setRouteProgressIndex] = useState(0);
 
@@ -73,47 +76,22 @@ export const BookingScreenContainer = () => {
   // Simulated ride movement
   const simulationIndexRef = useRef(0);
   const simulationIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  //#endregion
 
-  // Ride completed modal visibility
-  useEffect(() => {
-    if (rideState === RideState.RIDE_COMPLETED) {
-      setIsRideCompletedModalVisible(true);
-    }
-  }, [rideState]);
-
-  // Ride completed modal dismiss
-  const handleRideCompletedModalDismiss = () => {
-    setIsRideCompletedModalVisible(false);
-    navigate(STACK_ROUTES.TabNavigator, { screen: TAB_ROUTES.Activity });
-  };
-
-  // Calculate distance between current location and destination location
-  const calculateDistance = useCallback(async () => {
-    if (currentLocationCords && destinationLocationCords) {
-      try {
-        const result = await fetchDistanceMatrix(
-          currentLocationCords,
-          destinationLocationCords,
-        );
-
-        setDistanceInfo({
-          distance: result.distance.text,
-          duration: result.duration.text,
-        });
-      } catch (error) {
-        console.error('Error calculating distance:', error);
-        setDistanceInfo(null);
+  //#region MAP REGION
+  // Center the map on the user's current location
+  const mapRegion = currentLocationCords
+    ? {
+        latitude: currentLocationCords.latitude,
+        longitude: currentLocationCords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
       }
-    } else {
-      setDistanceInfo(null);
-    }
-  }, [currentLocationCords, destinationLocationCords, setDistanceInfo]);
+    : undefined;
 
-  // Calculate distance when coordinates change
-  useEffect(() => {
-    calculateDistance();
-  }, [calculateDistance]);
+  // #endregion
 
+  //#region RIDER STATUS : SELECTING_DESTINATION
   // Handle back press
   const handleBackPress = useCallback(() => {
     if (rideState === RideState.SELECTING_DESTINATION) {
@@ -146,22 +124,6 @@ export const BookingScreenContainer = () => {
     }
   };
 
-  // Handle prediction press
-  const handlePredictionPress = useCallback(async (place: GooglePlaceData) => {
-    try {
-      const data = await fetchPlaceDetails(place.place_id);
-      if (data && data.result && data.result.geometry) {
-        const { lat, lng } = data.result.geometry.location;
-        setDestinationLocationCords({ latitude: lat, longitude: lng });
-        setDestinationLocation(place.description);
-        setDestinationInput(place.description);
-        setPredictions([]);
-      }
-    } catch (error) {
-      console.error('Error fetching place details:', error);
-    }
-  }, []);
-
   const getAddressFromCords = useCallback(
     async (latitude: number, longitude: number) => {
       try {
@@ -174,28 +136,8 @@ export const BookingScreenContainer = () => {
         console.error('Error fetching address:', error);
       }
     },
-    [],
+    [setCurrentLocation],
   );
-
-  // Function to get route from Google Directions API
-  const getDirections = useCallback(async () => {
-    if (!currentLocationCords || !destinationLocationCords) return;
-
-    try {
-      const data = await fetchDirections(
-        currentLocationCords,
-        destinationLocationCords,
-      );
-      if (data && data.routes && data.routes.length > 0) {
-        const points = decodePolyline(data.routes[0].overview_polyline.points);
-        return points;
-      }
-    } catch (error) {
-      console.error('Error fetching directions:', error);
-      return [];
-    }
-  }, [currentLocationCords, destinationLocationCords]);
-
   // Get current location
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -222,6 +164,24 @@ export const BookingScreenContainer = () => {
     }
     setDestinationLocation(data.description);
   };
+  // Function to get route from Google Directions API
+  const getDirections = useCallback(async () => {
+    if (!currentLocationCords || !destinationLocationCords) return;
+
+    try {
+      const data = await fetchDirections(
+        currentLocationCords,
+        destinationLocationCords,
+      );
+      if (data && data.routes && data.routes.length > 0) {
+        const points = decodePolyline(data.routes[0].overview_polyline.points);
+        return points;
+      }
+    } catch (error) {
+      console.error('Error fetching directions:', error);
+      return [];
+    }
+  }, [currentLocationCords, destinationLocationCords]);
 
   // Fetch route when both locations are available
   useEffect(() => {
@@ -238,7 +198,37 @@ export const BookingScreenContainer = () => {
     getDirections,
     setRouteCoordinates,
   ]);
+  //#endregion
 
+  //#region RIDER STATUS : SELECTING_VEHICLE
+  // Calculate distance between current location and destination location
+  const calculateDistance = useCallback(async () => {
+    if (currentLocationCords && destinationLocationCords) {
+      try {
+        const result = await fetchDistanceMatrix(
+          currentLocationCords,
+          destinationLocationCords,
+        );
+
+        setDistanceInfo({
+          distance: result.distance.text,
+          duration: result.duration.text,
+        });
+      } catch (error) {
+        console.error('Error calculating distance:', error);
+        setDistanceInfo(null);
+      }
+    } else {
+      setDistanceInfo(null);
+    }
+  }, [currentLocationCords, destinationLocationCords, setDistanceInfo]);
+
+  // Calculate distance when coordinates change
+  useEffect(() => {
+    calculateDistance();
+  }, [calculateDistance]);
+
+  //#region RIDE STATUS : SELECTING_VEHICLE
   const handleVehicleSelect = useCallback(
     (type: string) => {
       setVehicleType(type);
@@ -260,6 +250,8 @@ export const BookingScreenContainer = () => {
     ],
   );
 
+  //#endregion
+
   // Handle updated pickup location from draggable pin
   const handlePickupLocationSet = useCallback(
     (coords: { latitude: number; longitude: number }) => {
@@ -279,6 +271,47 @@ export const BookingScreenContainer = () => {
     }),
   ).current;
 
+  //#region RIDER STATUS : CONFIRMING_PICKUP
+
+  // Handle prediction press
+  const handlePredictionPress = useCallback(
+    async (place: GooglePlaceData) => {
+      try {
+        const data = await fetchPlaceDetails(place.place_id);
+        if (data && data.result && data.result.geometry) {
+          const { lat, lng } = data.result.geometry.location;
+          setDestinationLocationCords({ latitude: lat, longitude: lng });
+          setDestinationLocation(place.description);
+          setDestinationInput(place.description);
+          // Add a small delay to ensure state updates are processed
+          setTimeout(() => {
+            console.log('Setting rideState to SELECTING_VEHICLE');
+            setRideState(RideState.SELECTING_VEHICLE);
+
+            // Log the state after a brief delay to see if it was set correctly
+            setTimeout(() => {
+              console.log('RideState should now be SELECTING_VEHICLE');
+            }, 100);
+          }, 100);
+          console.log('rideState after destination select', rideState);
+          setPredictions([]);
+        }
+      } catch (error) {
+        console.error('Error fetching place details:', error);
+      }
+    },
+    [
+      setDestinationInput,
+      setDestinationLocation,
+      setDestinationLocationCords,
+      setRideState,
+      rideState,
+    ],
+  );
+
+  //#endregion
+
+  // stop simulated ride
   const stopSimulatedRide = useCallback(() => {
     if (simulationIntervalRef.current) {
       clearInterval(simulationIntervalRef.current);
@@ -332,7 +365,6 @@ export const BookingScreenContainer = () => {
   // Handle confirm ride
   const handleConfirmRide = () => {
     setRideState(RideState.RIDE_STARTED);
-    console.log('handleConfirmRide');
 
     // Start simulated movement along route (useful when device is stationary / testing in emulator)
     startSimulatedRide();
@@ -350,6 +382,10 @@ export const BookingScreenContainer = () => {
       { enableHighAccuracy: true, distanceFilter: 5, interval: 3000 },
     );
   };
+
+  //#endregion
+
+  // #region RIDER STATUS : RIDE_COMPLETED
 
   // Handle pay and save ride
   const handlePayAndSaveRide = async () => {
@@ -371,6 +407,20 @@ export const BookingScreenContainer = () => {
     // setDestinationLocation('');
     // setDestinationLocationCords({ latitude: 0, longitude: 0 });
   };
+
+  // Ride completed modal visibility
+  useEffect(() => {
+    if (rideState === RideState.RIDE_COMPLETED) {
+      setIsRideCompletedModalVisible(true);
+    }
+  }, [rideState]);
+
+  // Ride completed modal dismiss
+  const handleRideCompletedModalDismiss = () => {
+    setIsRideCompletedModalVisible(false);
+    navigate(STACK_ROUTES.TabNavigator, { screen: TAB_ROUTES.Activity });
+  };
+  // #endregion
 
   // Cleanup on unmount
   useEffect(() => {
@@ -410,6 +460,7 @@ export const BookingScreenContainer = () => {
       isRideCompletedModalVisible={isRideCompletedModalVisible}
       handleRideCompletedModalDismiss={handleRideCompletedModalDismiss}
       handlePayAndSaveRide={handlePayAndSaveRide}
+      mapRegion={mapRegion}
     />
   );
 };

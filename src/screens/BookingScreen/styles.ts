@@ -63,8 +63,8 @@ export const styles = StyleSheet.create({
     borderColor: Colors.textwhite,
     borderWidth: 0,
     borderRadius: 24,
-    width: width * 0.65,
-    height: height * 0.06,
+    width: width * 0.7,
+    height: height * 0.035,
     padding: 0,
     color: Colors.textwhite,
   },
@@ -73,9 +73,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 12,
-    borderColor: Colors.textwhite,
-    borderWidth: 2,
-    borderRadius: 24,
+    backgroundColor: Colors.lightText,
+    borderRadius: 16,
     padding: 12,
     marginTop: 4,
   },
@@ -90,8 +89,8 @@ export const styles = StyleSheet.create({
   },
   line: {
     width: 2,
-    height: 10,
-    backgroundColor: Colors.textwhite,
+    height: 8,
+    backgroundColor: Colors.textgray,
   },
   predictionsContainer: {
     backgroundColor: Colors.white,
@@ -240,5 +239,11 @@ export const styles = StyleSheet.create({
   modalButtonText: {
     ...BoldFont16,
     color: Colors.textwhite,
+  },
+  textLine: {
+    height: StyleSheet.hairlineWidth,
+    width: '100%',
+    marginVertical: 2,
+    backgroundColor: Colors.markerGray,
   },
 });
